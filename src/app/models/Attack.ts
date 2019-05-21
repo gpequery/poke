@@ -1,12 +1,16 @@
+import {Family} from "../enum/Family";
+
 export class Attack {
     private _label: string;
     private _priority: number;
     private _power: number;
+    private _family: Family;
 
-    constructor(label: string, priority: number, power: number) {
+    constructor(label: string, priority: number, power: number, family: Family) {
         this._label = label;
         this._priority = priority;
         this._power = power;
+        this._family = family;
     }
 
     get label(): string {
@@ -31,5 +35,13 @@ export class Attack {
 
     set priority(priority: number) {
         this._priority = priority
+    }
+
+    get family(): Family {
+        return this._family
+    }
+
+    set family(family: Family) {
+        this._family = family
     }
 }

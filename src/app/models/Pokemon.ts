@@ -1,15 +1,18 @@
 import {Attack} from "./Attack";
+import {Family} from "../enum/Family";
 
 export class Pokemon {
     private _name: string;
     private _speed: number;
     private _life: number;
+    private _family: Family;
     private _attacks: Array<Attack>;
 
-    constructor(name: string, speed: number, attacks: Array<Attack>) {
+    constructor(name: string, speed: number, family: Family, attacks: Array<Attack>) {
         this._name = name;
         this._speed = speed;
         this._life = 100;
+        this._family = family;
         this._attacks = attacks;
     }
 
@@ -39,6 +42,14 @@ export class Pokemon {
 
     get attacks(): Array<Attack> {
         return this._attacks
+    }
+
+    get family(): Family {
+        return this._family
+    }
+
+    set family(family: Family) {
+        this._family = family
     }
 
     set attacks(attacks: Array<Attack>) {

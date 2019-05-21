@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Attack, Pokemon} from "./models";
+import {Family} from "./enum";
 
 @Component({
     selector: 'app-root',
@@ -13,35 +14,35 @@ export class AppComponent {
     }
 
     attacks: Array<Attack> = [
-        new Attack('Poursuite', 7, 25),
-        new Attack('Switch', 6, 24),
-        new Attack('Coup D\'Main', 5, 23),
-        new Attack('Reflet Magik', 4, 22),
-        new Attack('Prévention', 3, 20),
-        new Attack('Ruse', 2, 19),
-        new Attack('Coup Bas', 1, 16),
-        new Attack('Déplacement', 0, 13),
-        new Attack('Corps Perdu', -1, 10),
-        new Attack('Aucune', -2, 8),
-        new Attack('Mitra-Poing', -3, 6),
-        new Attack('Avalanche', -4, 4),
-        new Attack('Riposte', -5, 2),
-        new Attack('Cyclone', -6, 1),
-        new Attack('Distorsion', -7, 0)
+        new Attack('Feu Follet', 7, 25, Family.FIRE),
+        new Attack('Hydrocanon', 6, 24, Family.WATER),
+        new Attack('Eclair', 5, 23, Family.ELECTRIC),
+        new Attack('Fouet liagne', 4, 22, Family.PLANT),
+        new Attack('Triplattaque', 3, 20, Family.NORMAL),
+        new Attack('Tacle feu', 2, 19, Family.FIRE),
+        new Attack('Cascade', 1, 16, Family.WATER),
+        new Attack('Etincelle', 0, 13, Family.ELECTRIC),
+        new Attack('Spore', -1, 10, Family.PLANT),
+        new Attack('Picanon', -2, 8, Family.NORMAL),
+        new Attack('Feu follet', -3, 6, Family.FIRE),
+        new Attack('Siphon', -4, 4, Family.WATER),
+        new Attack('Onde de choc', -5, 2, Family.ELECTRIC),
+        new Attack('Fulmigraine', -6, 1, Family.PLANT),
+        new Attack('Croc de mort', -7, 0, Family.NORMAL)
     ];
 
     pokemonList1: Array<Pokemon> = [
-        new Pokemon('Dracaufeu', 5, this.attacks),
-        new Pokemon('Evolie', 20, this.attacks),
-        new Pokemon('Miaouss', 10, this.attacks),
-        new Pokemon('Voltali', 15, this.attacks),
+        new Pokemon('Dracaufeu', 5, Family.FIRE, this.attacks),
+        new Pokemon('Magicarpe', 20, Family.WATER, this.attacks),
+        new Pokemon('Caterpie', 10, Family.PLANT,this.attacks),
+        new Pokemon('Voltali', 15, Family.ELECTRIC, this.attacks),
     ];
 
     pokemonList2: Array<Pokemon> = [
-        new Pokemon('Chetiflor', 5, this.attacks),
-        new Pokemon('Roucool', 20, this.attacks),
-        new Pokemon('taupiqueur', 10, this.attacks),
-        new Pokemon('tentacool', 15, this.attacks),
+        new Pokemon('Chetiflor', 5, Family.PLANT, this.attacks),
+        new Pokemon('Roucool', 20, Family.NORMAL, this.attacks),
+        new Pokemon('Magmar', 10, Family.FIRE, this.attacks),
+        new Pokemon('Tentacool', 15, Family.WATER, this.attacks),
     ];
 
     title = 'poke';
