@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LikeButtonComponent } from './like-button/like-button.component';
+import {LikeButtonComponent} from "./components/like-button/like-button.component";
+import {PkmDataComponent} from "./components/pkm-data/pkm-data.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LikeButtonComponent
+    LikeButtonComponent,
+    PkmDataComponent
   ],
   imports: [
     BrowserModule,
