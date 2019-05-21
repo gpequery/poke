@@ -1,0 +1,47 @@
+select {
+    cursor: pointer;
+}
+
+.container-full {
+    position: absolute;
+    top: calc(50% - 150px);
+    left: 10%;
+    right: 10%;
+    height: 300px;
+
+    .pokemonData {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    #fight {
+        #action {
+            position: absolute;
+            top: calc(50% - 25px);
+            left: 0;
+            right: 0;
+            text-align: center;
+
+            &:hover {
+                img {
+                    opacity: 1;
+                }
+            }
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0.1;
+        }
+
+        &:hover {
+            img {
+                opacity: 0.5;
+            }
+        }
+    }
+}

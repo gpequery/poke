@@ -1,16 +1,20 @@
-<div class="row justify-content-around">
+<div class="row container-full">
     <div class="col-3">
-        <app-pokemon-list [pokemonList]="pokemonList1" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
-        <app-pkm-data *ngIf="pokemon1" [pokemon]="pokemon1"></app-pkm-data>
+        <app-pokemon-list *ngIf="!isPlaying" [pokemonList]="pokemonList1" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
+        <app-pkm-data *ngIf="pokemon1" [pokemon]="pokemon1" class="pokemonData"></app-pkm-data>
     </div>
 
-    <div class="col-6" id="fight">
+    <div class="col-6 position-relative" id="fight">
         <div class="text-center" [innerHTML]="logs"></div>
+        <div *ngIf="pokemon1 && pokemon2" id="action">
+            <img *ngIf="!isPlaying" src="../assets/play.png" (click)="run()">
+            <img *ngIf="isPlaying" src="../assets/pause.png" (click)="stop()">
+        </div>
     </div>
 
     <div class="col-3">
-        <app-pokemon-list [pokemonList]="pokemonList2" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
-        <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2"></app-pkm-data>
+        <app-pokemon-list *ngIf="!isPlaying" [pokemonList]="pokemonList2" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
+        <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2" class="pokemonData"></app-pkm-data>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Attack, Pokemon} from "./models";
-import {Family} from "./enum";
+import {Attack, Pokemon} from './models';
+import {Family} from './enum';
 
 @Component({
     selector: 'app-root',
@@ -34,7 +34,7 @@ export class AppComponent {
     pokemonList1: Array<Pokemon> = [
         new Pokemon('Dracaufeu', 5, Family.FIRE, this.attacks),
         new Pokemon('Magicarpe', 20, Family.WATER, this.attacks),
-        new Pokemon('Caterpie', 10, Family.PLANT,this.attacks),
+        new Pokemon('Caterpie', 10, Family.PLANT, this.attacks),
         new Pokemon('Voltali', 15, Family.ELECTRIC, this.attacks),
     ];
 
@@ -49,6 +49,7 @@ export class AppComponent {
     pokemon1: Pokemon;
     pokemon2: Pokemon;
     logs = '';
+    isPlaying = false;
 
 
     choosePokemon1(pokemon) {
@@ -59,13 +60,21 @@ export class AppComponent {
         this.pokemon2 = pokemon;
     }
 
+    run() {
+        this.isPlaying = true;
+    }
+
+    stop() {
+        this.isPlaying = false;
+    }
+
     lunchFight() {
         while (this.pokemon1.life > 0 && this.pokemon2.life > 0) {
-            let pokemon1Attack = this.pokemon1.getRandomAttack();
-            let pokemon2Attack = this.pokemon2.getRandomAttack();
+            const pokemon1Attack = this.pokemon1.getRandomAttack();
+            const pokemon2Attack = this.pokemon2.getRandomAttack();
 
-            let firstPokemon = this.pokemon1.isFirstToAttack(pokemon1Attack, pokemon2Attack, this.pokemon2) ? this.pokemon1 : this.pokemon2;
-            let secondPokemon = firstPokemon === this.pokemon2 ? this.pokemon1 : this.pokemon2;
+            const firstPokemon = this.pokemon1.isFirstToAttack(pokemon1Attack, pokemon2Attack, this.pokemon2) ? this.pokemon1 : this.pokemon2;
+            const secondPokemon = firstPokemon === this.pokemon2 ? this.pokemon1 : this.pokemon2;
 
             if (firstPokemon.isFirstToAttack(pokemon1Attack, pokemon2Attack, secondPokemon)) {
                 this.printAttack(firstPokemon, pokemon1Attack);
