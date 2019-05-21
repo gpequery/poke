@@ -1,6 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
-
-<app-pkm-data [pokemon]="pokemon1"></app-pkm-data>
-<app-pkm-data [pokemon]="pokemon2"></app-pkm-data>
+<div class="row justify-content-around">
+    <div class="col-5">
+        <app-pkm-data [pokemon]="pokemon1"></app-pkm-data>
+    </div>
+    <div class="col-5">
+        <app-pkm-data [pokemon]="pokemon2"></app-pkm-data>
+    </div>
+</div>
 
 <router-outlet></router-outlet>
