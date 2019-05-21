@@ -12,8 +12,6 @@ export class AppComponent {
         // this.lunchFight();
     }
 
-    title = 'poke';
-
     attacks: Array<Attack> = [
         new Attack('Poursuite', 7, 25),
         new Attack('Switch', 6, 24),
@@ -32,14 +30,21 @@ export class AppComponent {
         new Attack('Distorsion', -7, 0)
     ];
 
-    pokemonList: Array<Pokemon> = [
+    pokemonList1: Array<Pokemon> = [
         new Pokemon('Dracaufeu', 5, this.attacks),
         new Pokemon('Evolie', 20, this.attacks),
         new Pokemon('Miaouss', 10, this.attacks),
         new Pokemon('Voltali', 15, this.attacks),
     ];
 
-    // pokemon1 = new Pokemon('Greg', 10, this.attacks);
+    pokemonList2: Array<Pokemon> = [
+        new Pokemon('Chetiflor', 5, this.attacks),
+        new Pokemon('Roucool', 20, this.attacks),
+        new Pokemon('taupiqueur', 10, this.attacks),
+        new Pokemon('tentacool', 15, this.attacks),
+    ];
+
+    title = 'poke';
     pokemon1: Pokemon;
     pokemon2: Pokemon;
     logs = '';

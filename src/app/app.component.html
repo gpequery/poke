@@ -1,6 +1,6 @@
 <div class="row justify-content-around">
     <div class="col-3">
-        <app-pokemon-list [pokemonList]="pokemonList" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
+        <app-pokemon-list [pokemonList]="pokemonList1" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
         <app-pkm-data *ngIf="pokemon1" [pokemon]="pokemon1"></app-pkm-data>
     </div>
 
@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-3">
-        <app-pokemon-list [pokemonList]="pokemonList" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
+        <app-pokemon-list [pokemonList]="pokemonList2" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
         <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2"></app-pkm-data>
     </div>
 </div>
