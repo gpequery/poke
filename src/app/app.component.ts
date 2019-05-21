@@ -10,7 +10,7 @@ import {Family} from './enum';
 
 export class AppComponent {
     constructor() {
-        // this.lunchFight();
+        this.lunchFight();
     }
 
     attacks: Array<Attack> = [
@@ -62,13 +62,19 @@ export class AppComponent {
 
     run() {
         this.isPlaying = true;
+        // TODO : lunch Fight !
     }
 
     stop() {
         this.isPlaying = false;
+        // TODO : stop Fight !
     }
 
     lunchFight() {
+        // TODO remove two line under this comment
+        this.pokemon1 = new Pokemon('Dracaufeu', 5, Family.FIRE, this.attacks);
+        this.pokemon2 = new Pokemon('Caterpie', 10, Family.PLANT, this.attacks);
+
         while (this.pokemon1.life > 0 && this.pokemon2.life > 0) {
             const pokemon1Attack = this.pokemon1.getRandomAttack();
             const pokemon2Attack = this.pokemon2.getRandomAttack();
@@ -79,14 +85,14 @@ export class AppComponent {
             if (firstPokemon.isFirstToAttack(pokemon1Attack, pokemon2Attack, secondPokemon)) {
                 this.printAttack(firstPokemon, pokemon1Attack);
 
-                if (firstPokemon.attack(secondPokemon, pokemon1Attack)) {
+                if (Pokemon.attack(secondPokemon, pokemon1Attack)) {
                     this.printWinner(firstPokemon);
                 }
 
-                if (secondPokemon.life >= 0) {
+                if (secondPokemon.life > 0) {
                     this.printAttack(secondPokemon, pokemon2Attack);
 
-                    if (secondPokemon.attack(this.pokemon1, pokemon2Attack)) {
+                    if (Pokemon.attack(this.pokemon1, pokemon2Attack)) {
                         this.printWinner(secondPokemon);
                     }
                 }
@@ -95,10 +101,10 @@ export class AppComponent {
     }
 
     printAttack(pokemon: Pokemon, attack: Attack): void {
-        this.logs += `<p>${pokemon.name} attaque  ${attack.label}</p>`;
+        this.logs += `<div><span class="text-${pokemon.family}">${pokemon.name}</span> attaque  <span class="text-${attack.family}">${attack.label}</span></div>`;
     }
 
     printWinner(pokemon: Pokemon): void {
-        this.logs += `${pokemon.name} Win`;
+        this.logs += `<h2>${pokemon.name} Win</h2>`;
     }
 }
