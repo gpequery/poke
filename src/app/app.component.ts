@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {Pokemon} from "./models/Pokemon";
-import {Attack} from "./models/Attack";
+import {Pokemon, Attack} from "./models";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'poke';
 
