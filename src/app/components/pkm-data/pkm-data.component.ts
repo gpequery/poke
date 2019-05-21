@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {AppComponent} from '../../app.component';
+import {Component, Input} from '@angular/core';
 import {Pokemon} from "../../models/Pokemon";
 
 @Component({
@@ -8,7 +7,7 @@ import {Pokemon} from "../../models/Pokemon";
   styleUrls: ['./pkm-data.component.scss']
 })
 export class PkmDataComponent {
-  message="Test";
+  @Input() pokemon: Pokemon;
 
   constructor() { }
 }
