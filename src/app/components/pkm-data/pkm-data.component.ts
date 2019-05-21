@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Pokemon} from "../../models/Pokemon";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Pokemon} from "../../models/";
 
 @Component({
   selector: 'app-pkm-data',
@@ -8,6 +8,12 @@ import {Pokemon} from "../../models/Pokemon";
 })
 export class PkmDataComponent {
   @Input() pokemon: Pokemon;
+  @Output() alerteCanicule = new EventEmitter<any>();
+
+  handleClick() {
+    console.log('click');
+    this.alerteCanicule.emit();
+  }
 
   constructor() { }
 }
