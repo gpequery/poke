@@ -9,7 +9,7 @@ import {Attack, Pokemon} from "./models";
 
 export class AppComponent {
     constructor() {
-        this.lunchFight();
+        // this.lunchFight();
     }
 
     title = 'poke';
@@ -32,13 +32,25 @@ export class AppComponent {
         new Attack('Distorsion', -7, 0)
     ];
 
-    pokemon1 = new Pokemon('Greg', 10, this.attacks);
-    pokemon2 = new Pokemon('Juan', 20, this.attacks);
+    pokemonList: Array<Pokemon> = [
+        new Pokemon('Dracofeu', 5, this.attacks),
+        new Pokemon('Evolie', 20, this.attacks),
+        new Pokemon('Miaouss', 10, this.attacks),
+        new Pokemon('Voltali', 15, this.attacks),
+    ];
+
+    // pokemon1 = new Pokemon('Greg', 10, this.attacks);
+    pokemon1: Pokemon;
+    pokemon2: Pokemon;
     logs = '';
 
-    test() {
-        this.pokemon1.life = 0;
-        console.log('Test');
+
+    choosePokemon1(pokemon) {
+        this.pokemon1 = pokemon;
+    }
+
+    choosePokemon2(pokemon) {
+        this.pokemon2 = pokemon;
     }
 
     lunchFight() {

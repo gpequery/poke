@@ -1,12 +1,17 @@
 <div class="row justify-content-around">
-    <div class="col-5">
-        <app-pkm-data [pokemon]="pokemon1" (alerteCanicule)="test()"></app-pkm-data>
-    </div>
-    <div class="col-5">
-        <app-pkm-data [pokemon]="pokemon2"></app-pkm-data>
+    <div class="col-3">
+        <app-pokemon-list [pokemonList]="pokemonList" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
+        <app-pkm-data *ngIf="pokemon1" [pokemon]="pokemon1"></app-pkm-data>
     </div>
 
-    <div class="col-5" [innerHTML]="logs"></div>
+    <div class="col-6" id="fight">
+        <div class="text-center" [innerHTML]="logs"></div>
+    </div>
+
+    <div class="col-3">
+        <app-pokemon-list [pokemonList]="pokemonList" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
+        <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2"></app-pkm-data>
+    </div>
 </div>
 
 <router-outlet></router-outlet>

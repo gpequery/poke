@@ -8,12 +8,6 @@ import {Pokemon} from "../../models/";
 })
 export class PkmDataComponent {
   @Input() pokemon: Pokemon;
-  @Output() alerteCanicule = new EventEmitter<any>();
-
-  handleClick() {
-    console.log('click');
-    this.alerteCanicule.emit();
-  }
 
   constructor() { }
 }
