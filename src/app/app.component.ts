@@ -33,7 +33,7 @@ export class AppComponent {
     ];
 
     pokemonList: Array<Pokemon> = [
-        new Pokemon('Dracofeu', 5, this.attacks),
+        new Pokemon('Dracaufeu', 5, this.attacks),
         new Pokemon('Evolie', 20, this.attacks),
         new Pokemon('Miaouss', 10, this.attacks),
         new Pokemon('Voltali', 15, this.attacks),
