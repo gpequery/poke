@@ -7,7 +7,7 @@ export class Family {
         this._className = className;
     }
 
-    get label(): string {
-
-    }
+    // get label(): string {
+    //
+    // }
 }
