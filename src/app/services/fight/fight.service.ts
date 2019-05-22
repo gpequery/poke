@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Attack, Family, Pokemon, Logs} from "../../models";
+import {Attack, Family, Pokemon, Logs, Player} from "../../models";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FightService  {
-
+    player1: Player;
+    player2: Player;
     normalFamily: Family;
     normalAttacks: Array<Attack>;
     fireFamily: Family;
@@ -28,6 +29,9 @@ export class FightService  {
     }
 
     initData() {
+        this.player1 = new Player('player 1');
+        this.player2 = new Player('player 2');
+
         this.normalFamily = new Family('Normal', 'secondary');
         this.fireFamily = new Family('Fire', 'danger');
         this.waterFamily = new Family('Water', 'info');
@@ -90,20 +94,20 @@ export class FightService  {
             new Pokemon('Magmar', 10, this.fireFamily, this.fireAttacks),
             new Pokemon('Tentacool', 15, this.waterFamily, this.watterAttacks)
         ];
+
+        this.initPlayerPokemons();
     }
 
-    pokemonRandomList(): any{
-        let pokemonsReturnList: Array<Pokemon> = [];
+    initPlayerPokemons() {
+        this.player1.addPokemon(this.pokemonsList[0]);
+        this.player1.addPokemon(this.pokemonsList[1]);
+        this.player1.addPokemon(this.pokemonsList[2]);
+        this.player1.addPokemon(this.pokemonsList[3]);
 
-        for(let i=0; i<4; i++) {
-            pokemonsReturnList.push(this.pokemonsList[this.randomValue()]);
-        }
-
-        return pokemonsReturnList;
-    }
-
-    randomValue(): any{
-        return Math.floor(Math.random() * Math.floor(this.pokemonsList.length))
+        this.player2.addPokemon(this.pokemonsList[4]);
+        this.player2.addPokemon(this.pokemonsList[5]);
+        this.player2.addPokemon(this.pokemonsList[6]);
+        this.player2.addPokemon(this.pokemonsList[7]);
     }
 
     addAttackLog(pokemon: Pokemon): void {
@@ -133,7 +137,7 @@ export class FightService  {
         }
     }
 
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon){
+    launchFight(pokemon1: Pokemon, pokemon2: Pokemon) {
         this.isPlaying = true;
         this.alreadyStart = true;
 
@@ -150,6 +154,6 @@ export class FightService  {
 
             this.fightLoop(pokemon1, pokemon2, currentPokemon);
             i++;
-        }, 200);
+        }, 50);
     }
 }

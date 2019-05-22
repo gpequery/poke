@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FightService} from "./services";
 import {Logs} from "./models/Logs";
-import {Pokemon} from "./models";
+import {Player, Pokemon} from "./models";
 
 @Component({
     selector: 'app-root',
@@ -13,17 +13,7 @@ export class AppComponent {
     pokemon1: Pokemon;
     pokemon2: Pokemon;
 
-    pokemonList1: Array<Pokemon>;
-    pokemonList2: Array<Pokemon>;
-
-    constructor(private fightService: FightService) {
-        this.init();
-    }
-
-    init(){
-        this.pokemonList1 = this.fightService.pokemonRandomList();
-        this.pokemonList2 = this.fightService.pokemonRandomList();
-    }
+    constructor(private fightService: FightService) {}
 
     choosePokemon1(pokemon) {
         this.pokemon1 = pokemon;
