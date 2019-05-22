@@ -100,7 +100,6 @@ export class AppComponent {
 
     stop() {
         this.isPlaying = false;
-        // TODO : stop Fight !
         clearInterval(this.fightInterval);
     }
 
@@ -110,6 +109,11 @@ export class AppComponent {
         if (!otherPokemon.isDead()) {
             this.addAttackLog(currentPokemon);
             currentPokemon.attack(otherPokemon);
+
+            if (otherPokemon.isDead()) {
+                this.addWinnerLog(currentPokemon);
+                this.stop();
+            }
         }
     }
 
@@ -131,16 +135,12 @@ export class AppComponent {
     }
 
     addAttackLog(pokemon: Pokemon): void {
+        console.log('t');
+        console.log(pokemon.name);
         this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
-        // this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
     }
 
     addWinnerLog(pokemon: Pokemon) {
         this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
-        // this.addLog(`<h2>${pokemon.name} Win</h2>`)
-    }
-
-    addLog(message: string) {
-        // this.logs.push(message);
     }
 }
