@@ -10,7 +10,6 @@ import {Pokemon} from "./models";
 })
 
 export class AppComponent {
-
     pokemon1: Pokemon;
     pokemon2: Pokemon;
 
@@ -20,6 +19,7 @@ export class AppComponent {
     logs: Array<Logs> = [];
     alreadyStart = false;
     isPlaying = false;
+    fightInterval;
 
     constructor(private fightService: FightService) {
         this.init();
@@ -41,44 +41,43 @@ export class AppComponent {
     run() {
         this.isPlaying = true;
         this.alreadyStart = true;
-        this.fightService.launchFight(this.pokemon1, this.pokemon2);
+        this.fightService.launchFight(this.pokemon1, this.pokemon2, this.fightInterval, this.isPlaying);
     }
 
     stop() {
-        this.isPlaying = false;
-        clearInterval(this.fightInterval);
+        this.fightService.stop(this.isPlaying, this.fightInterval);
     }
 
-    fightLoop(currentPokemon: Pokemon) {
-        let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
+    // fightLoop(currentPokemon: Pokemon) {
+    //     let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
+    //
+    //     if (!otherPokemon.isDead()) {
+    //         this.addAttackLog(currentPokemon);
+    //         currentPokemon.attack(otherPokemon);
+    //
+    //         if (otherPokemon.isDead()) {
+    //             this.addWinnerLog(currentPokemon);
+    //             this.stop();
+    //         }
+    //     }
+    // }
 
-        if (!otherPokemon.isDead()) {
-            this.addAttackLog(currentPokemon);
-            currentPokemon.attack(otherPokemon);
-
-            if (otherPokemon.isDead()) {
-                this.addWinnerLog(currentPokemon);
-                this.stop();
-            }
-        }
-    }
-
-    lunchFight() {
-        let currentPokemon;
-        let i = 0;
-        this.fightInterval= setInterval(() => {
-            if (i%2 === 0) {
-                this.pokemon1.prepareAttack();
-                this.pokemon2.prepareAttack();
-                currentPokemon = this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
-            } else {
-                currentPokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
-            }
-
-            this.fightLoop(currentPokemon);
-            i++;
-        }, 1000);
-    }
+    // lunchFight() {
+    //     let currentPokemon;
+    //     let i = 0;
+    //     this.fightInterval= setInterval(() => {
+    //         if (i%2 === 0) {
+    //             this.pokemon1.prepareAttack();
+    //             this.pokemon2.prepareAttack();
+    //             currentPokemon = this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
+    //         } else {
+    //             currentPokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
+    //         }
+    //
+    //         this.fightLoop(currentPokemon);
+    //         i++;
+    //     }, 1000);
+    // }
 
     addAttackLog(pokemon: Pokemon): void {
         console.log('t');

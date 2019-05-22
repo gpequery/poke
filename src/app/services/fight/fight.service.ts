@@ -111,28 +111,39 @@ export class FightService  {
         this.addLog(`<h2>${pokemon.name} Win</h2>`)
     }
 
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon): any {
-        while (pokemon1.life > 0 && pokemon2.life > 0) {
-            pokemon1.prepareAttack();
-            pokemon2.prepareAttack();
+    stop(isPlaying: boolean, fightInterval: number) {
+        isPlaying = false;
+        clearInterval(fightInterval);
+    }
 
-            let firstPokemon = pokemon1.isFirstToAttack(pokemon2) ? pokemon1 : pokemon2;
-            let secondPokemon = firstPokemon == pokemon1 ? pokemon2 : pokemon1;
+    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, isPlaying: boolean) {
+        let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
 
-            this.addAttackLog(firstPokemon);
+        if (!otherPokemon.isDead()) {
+            this.addAttackLog(currentPokemon);
+            currentPokemon.attack(otherPokemon);
 
-            if (firstPokemon.attack(secondPokemon)) {
-                this.addWinnerLog(firstPokemon);
-            }
-
-            if (secondPokemon.life > 0) {
-                this.addAttackLog(secondPokemon);
-
-                if (secondPokemon.attack(firstPokemon)) {
-                    this.addWinnerLog(secondPokemon);
-                }
+            if (otherPokemon.isDead()) {
+                this.addWinnerLog(currentPokemon);
+                this.stop(isPlaying, fightInterval);
             }
         }
-        return this.logs;
+    }
+
+    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, isPlaying: boolean){
+        let currentPokemon;
+        let i = 0;
+        fightInterval = setInterval(() => {
+            if (i%2 === 0) {
+                pokemon1.prepareAttack();
+                pokemon2.prepareAttack();
+                currentPokemon = pokemon1.isFirstToAttack(pokemon2) ? pokemon1 : pokemon2;
+            } else {
+                currentPokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
+            }
+
+            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, isPlaying);
+            i++;
+        }, 1000);
     }
 }

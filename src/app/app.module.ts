@@ -8,10 +8,6 @@ import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
 
 import {FightService} from "./services";
-import {PCustomColor} from './directives';
-import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
-
-// import { LogColorDirective } from './log-color.directive';
 
 @NgModule({
     declarations: [
