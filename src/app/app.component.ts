@@ -82,6 +82,7 @@ export class AppComponent {
     logs: Array<Logs> = [];
     alreadyStart = false;
     isPlaying = false;
+    fightInterval;
 
     choosePokemon1(pokemon) {
         this.pokemon1 = pokemon;
@@ -100,39 +101,42 @@ export class AppComponent {
     stop() {
         this.isPlaying = false;
         // TODO : stop Fight !
+        clearInterval(this.fightInterval);
     }
 
-    lunchFight() {
-        while (this.pokemon1.life > 0 && this.pokemon2.life > 0) {
-            this.pokemon1.prepareAttack();
-            this.pokemon2.prepareAttack();
+    fightLoop(currentPokemon: Pokemon) {
+        let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
-            let firstPokemon = this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
-            let secondPokemon = firstPokemon == this.pokemon1 ? this.pokemon2 : this.pokemon1;
-
-            this.addAttackLog(firstPokemon);
-
-            if (firstPokemon.attack(secondPokemon)) {
-                this.addWinnerLog(firstPokemon);
-            }
-
-            if (secondPokemon.life > 0) {
-                this.addAttackLog(secondPokemon);
-
-                if (secondPokemon.attack(firstPokemon)) {
-                    this.addWinnerLog(secondPokemon);
-                }
-            }
+        if (!otherPokemon.isDead()) {
+            this.addAttackLog(currentPokemon);
+            currentPokemon.attack(otherPokemon);
         }
     }
 
+    lunchFight() {
+        let currentPokemon;
+        let i = 0;
+        this.fightInterval= setInterval(() => {
+            if (i%2 === 0) {
+                this.pokemon1.prepareAttack();
+                this.pokemon2.prepareAttack();
+                currentPokemon = this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
+            } else {
+                currentPokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
+            }
+
+            this.fightLoop(currentPokemon);
+            i++;
+        }, 1000);
+    }
+
     addAttackLog(pokemon: Pokemon): void {
-        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className,false));
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
         // this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
     }
 
     addWinnerLog(pokemon: Pokemon) {
-        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label,  pokemon.currentAttack.family.className, true));
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
         // this.addLog(`<h2>${pokemon.name} Win</h2>`)
     }
 
