@@ -17,6 +17,8 @@ export class FightService  {
     plantAttacks: Array<Attack>;
     electricFamily: Family;
     electricAttacks: Array<Attack>;
+    alreadyStart: boolean;
+    isPlaying = false;
 
     pokemonsList: Array<Pokemon>;
     private logs = [];
@@ -108,12 +110,12 @@ export class FightService  {
         logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
     }
 
-    stop(isPlaying: boolean, fightInterval: number) {
-        isPlaying = false;
+    stop(fightInterval: number) {
+        this.isPlaying = false;
         clearInterval(fightInterval);
     }
 
-    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, isPlaying: boolean, logs: Array<Logs>) {
+    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, logs: Array<Logs>) {
         let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
 
         if (!otherPokemon.isDead()) {
@@ -122,14 +124,15 @@ export class FightService  {
 
             if (otherPokemon.isDead()) {
                 this.addWinnerLog(logs, currentPokemon);
-                this.stop(isPlaying, fightInterval);
+                this.stop(fightInterval);
             }
         }
     }
 
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, isPlaying: boolean, logs: Array<Logs>, alreadyStart: boolean){
-        isPlaying = true;
-        alreadyStart = true;
+    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, logs: Array<Logs>){
+        console.log('ici');
+        this.isPlaying = true;
+        this.alreadyStart = true;
 
         let currentPokemon;
         let i = 0;
@@ -142,7 +145,7 @@ export class FightService  {
                 currentPokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
             }
 
-            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, isPlaying, logs);
+            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, logs);
             i++;
         }, 200);
     }

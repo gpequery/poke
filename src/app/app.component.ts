@@ -17,7 +17,6 @@ export class AppComponent {
     pokemonList2: Array<Pokemon>;
 
     logs: Array<Logs> = [];
-    alreadyStart = false;
     isPlaying = false;
     fightInterval;
 
@@ -39,10 +38,10 @@ export class AppComponent {
     }
 
     run() {
-        this.fightService.launchFight(this.pokemon1, this.pokemon2, this.fightInterval, this.isPlaying, this.logs, this.alreadyStart);
+        this.fightService.launchFight(this.pokemon1, this.pokemon2, this.fightInterval, this.logs);
     }
 
     stop() {
-        this.fightService.stop(this.isPlaying, this.fightInterval);
+        this.fightService.stop(this.fightInterval);
     }
 }
