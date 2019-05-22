@@ -10,7 +10,7 @@ import {Family} from './enum';
 
 export class AppComponent {
     constructor() {
-        this.lunchFight();
+        // this.lunchFight();
     }
 
     attacks: Array<Attack> = [
@@ -49,6 +49,7 @@ export class AppComponent {
     pokemon1: Pokemon;
     pokemon2: Pokemon;
     logs = '';
+    alreadyStart = false;
     isPlaying = false;
 
 
@@ -62,6 +63,7 @@ export class AppComponent {
 
     run() {
         this.isPlaying = true;
+        this.alreadyStart = true;
         // TODO : lunch Fight !
     }
 

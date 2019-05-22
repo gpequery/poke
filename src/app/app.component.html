@@ -1,6 +1,6 @@
 <div class="row container-full">
-    <div class="col-3" [ngStyle]="{'opacity': pokemon1.isDead() ? '0.3' : '1' }">
-        <app-pokemon-list *ngIf="!isPlaying && !pokemon1.isDead() && !pokemon2.isDead()" [pokemonList]="pokemonList1" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
+    <div class="col-3" [ngStyle]="{'opacity': pokemon1 && pokemon1.isDead() ? '0.3' : '1' }">
+        <app-pokemon-list *ngIf="(!alreadyStart) || (!isPlaying && !pokemon1.isDead() && !pokemon2.isDead())" [pokemonList]="pokemonList1" (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
         <app-pkm-data *ngIf="pokemon1" [pokemon]="pokemon1" class="pokemonData"></app-pkm-data>
     </div>
 
@@ -12,8 +12,8 @@
         </div>
     </div>
 
-    <div class="col-3" [ngStyle]="{'opacity': pokemon2.isDead() ? '0.2' : '1' }">
-        <app-pokemon-list *ngIf="!isPlaying && !pokemon1.isDead() && !pokemon2.isDead()" [pokemonList]="pokemonList2" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
+    <div class="col-3" [ngStyle]="{'opacity': pokemon2 && pokemon2.isDead() ? '0.2' : '1' }">
+        <app-pokemon-list *ngIf="(!alreadyStart) || (!isPlaying && !pokemon1.isDead() && !pokemon2.isDead())" [pokemonList]="pokemonList2" (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
         <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2" class="pokemonData"></app-pkm-data>
     </div>
 </div>
