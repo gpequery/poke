@@ -1,5 +1,4 @@
 import {Pokemon} from "./Pokemon";
-import {Attack} from "./Attack";
 
 export class Logs {
     private _pokemon: Pokemon;
