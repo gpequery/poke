@@ -1,26 +1,17 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "./app/app.component";
 
-/* width */
 ::-webkit-scrollbar {
     width: 10px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
     background: #f8f9fa07;
+    border-radius: 15px;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #6c757d;
+    border-radius: 15px;
 }
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: blue;
-}
-
 ::-webkit-scrollbar {
     background-color: transparent;
 }
