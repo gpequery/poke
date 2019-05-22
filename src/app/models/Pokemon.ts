@@ -59,7 +59,7 @@ export class Pokemon {
 
     static attack(otherPokemon: Pokemon, myAttack: Attack): boolean {
         console.log(otherPokemon.family + ' : ' + myAttack.family);
-        FightService.isWeakFamily();
+        FightService.isWeakFamly();
 
         otherPokemon.life -= myAttack.power;
 

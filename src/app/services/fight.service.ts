@@ -8,7 +8,7 @@ export class FightService {
 
   constructor() { }
 
-    isWeakFamly(): void {
+    static isWeakFamly(): void {
         console.log('weak');
     }
 }
