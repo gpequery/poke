@@ -13,36 +13,64 @@ export class AppComponent {
         // this.lunchFight();
     }
 
-    attacks: Array<Attack> = [
+    fireAttacks: Array<Attack> = [
+        new Attack('Feu Follet', 7, 25, Family.FIRE),
+        new Attack('Triplattaque', 3, 20, Family.NORMAL),
+        new Attack('Tacle feu', 2, 19, Family.FIRE),
+        new Attack('Picanon', -2, 8, Family.NORMAL),
+        new Attack('Feu follet', -3, 6, Family.FIRE),
+        new Attack('Croc de mort', -7, 0, Family.NORMAL)
+    ];
+
+    watterAttacks: Array<Attack> = [
+        new Attack('Hydrocanon', 6, 24, Family.WATER),
+        new Attack('Triplattaque', 3, 20, Family.NORMAL),
+        new Attack('Cascade', 1, 16, Family.WATER),
+        new Attack('Picanon', -2, 8, Family.NORMAL),
+        new Attack('Siphon', -4, 4, Family.WATER),
+        new Attack('Croc de mort', -7, 0, Family.NORMAL)
+    ];
+
+    electricAttacks: Array<Attack> = [
+        new Attack('Eclair', 5, 23, Family.ELECTRIC),
+        new Attack('Triplattaque', 3, 20, Family.NORMAL),
+        new Attack('Etincelle', 0, 13, Family.ELECTRIC),
+        new Attack('Picanon', -2, 8, Family.NORMAL),
+        new Attack('Onde de choc', -5, 2, Family.ELECTRIC),
+        new Attack('Croc de mort', -7, 0, Family.NORMAL)
+    ];
+
+    plantAttacks: Array<Attack> = [
+        new Attack('Fouet liagne', 4, 22, Family.PLANT),
+        new Attack('Triplattaque', 3, 20, Family.NORMAL),
+        new Attack('Spore', -1, 10, Family.PLANT),
+        new Attack('Picanon', -2, 8, Family.NORMAL),
+        new Attack('Fulmigraine', -6, 1, Family.PLANT),
+        new Attack('Croc de mort', -7, 0, Family.NORMAL)
+    ];
+
+    normalAttacks: Array<Attack> = [
         new Attack('Feu Follet', 7, 25, Family.FIRE),
         new Attack('Hydrocanon', 6, 24, Family.WATER),
         new Attack('Eclair', 5, 23, Family.ELECTRIC),
         new Attack('Fouet liagne', 4, 22, Family.PLANT),
         new Attack('Triplattaque', 3, 20, Family.NORMAL),
-        new Attack('Tacle feu', 2, 19, Family.FIRE),
-        new Attack('Cascade', 1, 16, Family.WATER),
-        new Attack('Etincelle', 0, 13, Family.ELECTRIC),
-        new Attack('Spore', -1, 10, Family.PLANT),
         new Attack('Picanon', -2, 8, Family.NORMAL),
-        new Attack('Feu follet', -3, 6, Family.FIRE),
-        new Attack('Siphon', -4, 4, Family.WATER),
-        new Attack('Onde de choc', -5, 2, Family.ELECTRIC),
-        new Attack('Fulmigraine', -6, 1, Family.PLANT),
         new Attack('Croc de mort', -7, 0, Family.NORMAL)
     ];
 
     pokemonList1: Array<Pokemon> = [
-        new Pokemon('Dracaufeu', 5, Family.FIRE, this.attacks),
-        new Pokemon('Magicarpe', 20, Family.WATER, this.attacks),
-        new Pokemon('Caterpie', 10, Family.PLANT, this.attacks),
-        new Pokemon('Voltali', 15, Family.ELECTRIC, this.attacks),
+        new Pokemon('Dracaufeu', 5, Family.FIRE, this.fireAttacks),
+        new Pokemon('Magicarpe', 20, Family.WATER, this.watterAttacks),
+        new Pokemon('Caterpie', 10, Family.PLANT, this.plantAttacks),
+        new Pokemon('Voltali', 15, Family.ELECTRIC, this.electricAttacks),
     ];
 
     pokemonList2: Array<Pokemon> = [
-        new Pokemon('Chetiflor', 5, Family.PLANT, this.attacks),
-        new Pokemon('Roucool', 20, Family.NORMAL, this.attacks),
-        new Pokemon('Magmar', 10, Family.FIRE, this.attacks),
-        new Pokemon('Tentacool', 15, Family.WATER, this.attacks),
+        new Pokemon('Chetiflor', 5, Family.PLANT, this.plantAttacks),
+        new Pokemon('Roucool', 20, Family.NORMAL, this.normalAttacks),
+        new Pokemon('Magmar', 10, Family.FIRE, this.fireAttacks),
+        new Pokemon('Tentacool', 15, Family.WATER, this.watterAttacks),
     ];
 
     title = 'poke';
