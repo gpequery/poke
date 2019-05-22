@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Attack, Pokemon, Family} from './models';
+import {Attack, Family, Pokemon} from './models';
+import {FightService} from "./services";
 
 @Component({
     selector: 'app-root',
@@ -8,8 +9,9 @@ import {Attack, Pokemon, Family} from './models';
 })
 
 export class AppComponent {
-    constructor() {
+    constructor(private fightService: FightService) {
         // this.lunchFight();
+        fightService.test();
     }
 
     normalFamily = new Family('Normal', 'secondary');
@@ -112,19 +114,16 @@ export class AppComponent {
             const firstPokemon = this.pokemon1.isFirstToAttack(pokemon1Attack, pokemon2Attack, this.pokemon2) ? this.pokemon1 : this.pokemon2;
             const secondPokemon = firstPokemon === this.pokemon2 ? this.pokemon1 : this.pokemon2;
 
-            if (firstPokemon.isFirstToAttack(pokemon1Attack, pokemon2Attack, secondPokemon)) {
-                this.addAttackLog(firstPokemon, pokemon1Attack);
+            this.addAttackLog(firstPokemon, pokemon1Attack);
+            if (Pokemon.attack(secondPokemon, pokemon1Attack)) {
+                this.addWinnerLog(firstPokemon);
+            }
 
-                if (Pokemon.attack(secondPokemon, pokemon1Attack)) {
-                    this.addWinnerLog(firstPokemon);
-                }
+            if (secondPokemon.life > 0) {
+                this.addAttackLog(secondPokemon, pokemon2Attack);
 
-                if (secondPokemon.life > 0) {
-                    this.addAttackLog(secondPokemon, pokemon2Attack);
-
-                    if (Pokemon.attack(this.pokemon1, pokemon2Attack)) {
-                        this.addWinnerLog(secondPokemon);
-                    }
+                if (Pokemon.attack(this.pokemon1, pokemon2Attack)) {
+                    this.addWinnerLog(secondPokemon);
                 }
             }
         }
