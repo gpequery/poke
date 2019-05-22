@@ -1,4 +1,4 @@
-import {Family} from "../enum/Family";
+import {Family} from './Family';
 
 export class Attack {
     private _label: string;

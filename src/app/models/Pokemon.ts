@@ -1,6 +1,4 @@
-import {Attack} from './Attack';
-import {Family} from '../enum/Family';
-import {FightService} from '../services/fight.service';
+import {Attack, Family} from '.';
 
 export class Pokemon {
     private _name: string;
@@ -59,7 +57,6 @@ export class Pokemon {
 
     static attack(otherPokemon: Pokemon, myAttack: Attack): boolean {
         console.log(otherPokemon.family + ' : ' + myAttack.family);
-        FightService.isWeakFamly();
 
         otherPokemon.life -= myAttack.power;
 
