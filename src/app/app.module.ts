@@ -1,12 +1,15 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { PCustomBgColor } from './directives';
 import {PkmDataComponent, PokemonListComponent, LogsComponent} from './components';
 import {FightService} from "./services";
+import {PCustomColor} from './directives';
+import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
+
 // import { LogColorDirective } from './log-color.directive';
 
 @NgModule({
@@ -14,7 +17,7 @@ import {FightService} from "./services";
         AppComponent,
         PkmDataComponent,
         PokemonListComponent,
-        PCustomBgColor,
+        PCustomColor,
         LogsComponent
     ],
     providers: [
@@ -26,7 +29,7 @@ import {FightService} from "./services";
         FormsModule
     ],
     exports: [
-        PCustomBgColor
+        PCustomColor
     ],
     bootstrap: [AppComponent]
 })

@@ -20,7 +20,7 @@ export class Pokemon {
         return this._name;
     }
 
-    set name(speed: string) {
+    set name(name: string) {
         this._name = name;
     }
 
