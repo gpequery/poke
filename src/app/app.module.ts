@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {PkmDataComponent, PokemonListComponent} from './components';
+import {PkmDataComponent, PokemonListComponent, LogsComponent} from './components';
 
 @NgModule({
     declarations: [
         AppComponent,
         PkmDataComponent,
-        PokemonListComponent
+        PokemonListComponent,
+        LogsComponent
     ],
     imports: [
         BrowserModule,

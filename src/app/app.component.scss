@@ -17,6 +17,11 @@ select {
     }
 
     #fight {
+        .logs {
+            height: 300px;
+            overflow-y: scroll;
+        }
+
         #action {
             position: absolute;
             top: calc(50% - 25px);

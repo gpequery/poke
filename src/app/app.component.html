@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-6 position-relative text-white" id="fight">
-        <div class="text-center" [innerHTML]="logs"></div>
+        <app-logs [logs]="logs"></app-logs>
         <div *ngIf="pokemon1 && pokemon2" id="action">
             <img *ngIf="!isPlaying" src="../assets/play.png" (click)="run()">
             <img *ngIf="isPlaying" src="../assets/pause.png" (click)="stop()">
