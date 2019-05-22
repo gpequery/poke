@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FightService} from "./services";
+import {Logs} from "./models/Logs";
 import {Pokemon} from "./models";
 
 @Component({
@@ -16,10 +17,9 @@ export class AppComponent {
     pokemonList1: Array<Pokemon>;
     pokemonList2: Array<Pokemon>;
 
-    logs: Array<string> = [];
+    logs: Array<Logs> = [];
     alreadyStart = false;
     isPlaying = false;
-
 
     constructor(private fightService: FightService) {
         this.init();
@@ -48,16 +48,4 @@ export class AppComponent {
         this.isPlaying = false;
         // TODO : stop Fight !
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

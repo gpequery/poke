@@ -4,8 +4,9 @@ import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { PCustomBgColor } from './directives';
-import {PkmDataComponent, PokemonListComponent, LogsComponent} from './components';
+import {PCustomColor} from './directives';
+import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
+
 import {FightService} from "./services";
 import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
