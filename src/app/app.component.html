@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-6 position-relative text-white" id="fight">
-        <app-logs [logs]="logs"></app-logs>
+        <app-logs [logs]="logs" ></app-logs>
         <div *ngIf="pokemon1 && pokemon2" id="action">
             <img *ngIf="!isPlaying" src="../assets/play.png" (click)="run()">
             <img *ngIf="isPlaying" src="../assets/pause.png" (click)="stop()">
@@ -17,5 +17,7 @@
         <app-pkm-data *ngIf="pokemon2" [pokemon]="pokemon2" class="pokemonData"></app-pkm-data>
     </div>
 </div>
+
+<!--<div appLogColor>Greg WouleH</div>-->
 
 <router-outlet></router-outlet>

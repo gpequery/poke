@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PkmDataComponent, PokemonListComponent, LogsComponent} from './components';
+// import { LogColorDirective } from './log-color.directive';
 
 @NgModule({
     declarations: [

@@ -5,6 +5,7 @@ export class Pokemon {
     private _speed: number;
     private _life: number;
     private _family: Family;
+    private _currentAttack: Attack;
     private _attacks: Array<Attack>;
 
     constructor(name: string, speed: number, family: Family, attacks: Array<Attack>) {
@@ -47,6 +48,14 @@ export class Pokemon {
         this._attacks = attacks;
     }
 
+    get currentAttack(): Attack {
+        return this._currentAttack;
+    }
+
+    set currentAttack(currentAttack: Attack) {
+        this._currentAttack = currentAttack;
+    }
+
     get family(): Family {
         return this._family;
     }
@@ -55,10 +64,12 @@ export class Pokemon {
         this._family = family;
     }
 
-    static attack(otherPokemon: Pokemon, myAttack: Attack): boolean {
-        console.log(otherPokemon.family + ' : ' + myAttack.family);
+    prepareAttack() {
+        this.currentAttack = this.attacks[randomInt(0, this.attacks.length - 1)];
+    }
 
-        otherPokemon.life -= myAttack.power;
+    attack(otherPokemon: Pokemon): boolean {
+        otherPokemon.life -= this.currentAttack.power;
 
         if (otherPokemon.life < 0) {
             otherPokemon.life = 0;
@@ -67,12 +78,8 @@ export class Pokemon {
         return otherPokemon.life <= 0;
     }
 
-    getRandomAttack(): Attack {
-        return this.attacks[randomInt(0, this.attacks.length - 1)];
-    }
-
-    isFirstToAttack(myAttack: Attack, otherAttack: Attack, otherPokemon: Pokemon): boolean {
-        if (myAttack.priority === otherAttack.priority) {
+    isFirstToAttack(otherPokemon: Pokemon): boolean {
+        if (this.currentAttack.priority === otherPokemon.currentAttack.priority) {
             if (this.speed === otherPokemon.speed) {
                 return Math.random() > 0.5;
             } else {
@@ -80,7 +87,7 @@ export class Pokemon {
             }
         }
 
-        return myAttack.priority > otherAttack.priority;
+        return this.currentAttack.priority > otherPokemon.currentAttack.priority;
     }
 
     isDead() {

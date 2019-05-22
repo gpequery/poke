@@ -102,35 +102,31 @@ export class AppComponent {
     }
 
     lunchFight() {
-        console.log('lunchFight');
-        // TODO remove two line under this comment
-        // this.pokemon1 = new Pokemon('Dracaufeu', 5, Family.FIRE, this.fireAttacks);
-        // this.pokemon2 = new Pokemon('Caterpie', 10, Family.PLANT, this.plantAttacks);
-
         while (this.pokemon1.life > 0 && this.pokemon2.life > 0) {
-            const pokemon1Attack = this.pokemon1.getRandomAttack();
-            const pokemon2Attack = this.pokemon2.getRandomAttack();
+            this.pokemon1.prepareAttack();
+            this.pokemon2.prepareAttack();
 
-            const firstPokemon = this.pokemon1.isFirstToAttack(pokemon1Attack, pokemon2Attack, this.pokemon2) ? this.pokemon1 : this.pokemon2;
-            const secondPokemon = firstPokemon === this.pokemon2 ? this.pokemon1 : this.pokemon2;
+            let firstPokemon = this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
+            let secondPokemon = firstPokemon == this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
-            this.addAttackLog(firstPokemon, pokemon1Attack);
-            if (Pokemon.attack(secondPokemon, pokemon1Attack)) {
+            this.addAttackLog(firstPokemon);
+
+            if (firstPokemon.attack(secondPokemon)) {
                 this.addWinnerLog(firstPokemon);
             }
 
             if (secondPokemon.life > 0) {
-                this.addAttackLog(secondPokemon, pokemon2Attack);
+                this.addAttackLog(secondPokemon);
 
-                if (Pokemon.attack(this.pokemon1, pokemon2Attack)) {
+                if (secondPokemon.attack(firstPokemon)) {
                     this.addWinnerLog(secondPokemon);
                 }
             }
         }
     }
 
-    addAttackLog(pokemon: Pokemon, attack: Attack): void {
-        this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${attack.family.className}">${attack.label}</span>`)
+    addAttackLog(pokemon: Pokemon): void {
+        this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
     }
 
     addWinnerLog(pokemon: Pokemon) {
