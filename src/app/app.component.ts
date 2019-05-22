@@ -15,7 +15,6 @@ export class AppComponent {
 
     fireAttacks: Array<Attack> = [
         new Attack('Feu Follet', 7, 25, Family.FIRE),
-        new Attack('Triplattaque', 3, 20, Family.NORMAL),
         new Attack('Tacle feu', 2, 19, Family.FIRE),
         new Attack('Picanon', -2, 8, Family.NORMAL),
         new Attack('Feu follet', -3, 6, Family.FIRE),
@@ -24,7 +23,6 @@ export class AppComponent {
 
     watterAttacks: Array<Attack> = [
         new Attack('Hydrocanon', 6, 24, Family.WATER),
-        new Attack('Triplattaque', 3, 20, Family.NORMAL),
         new Attack('Cascade', 1, 16, Family.WATER),
         new Attack('Picanon', -2, 8, Family.NORMAL),
         new Attack('Siphon', -4, 4, Family.WATER),
@@ -33,7 +31,6 @@ export class AppComponent {
 
     electricAttacks: Array<Attack> = [
         new Attack('Eclair', 5, 23, Family.ELECTRIC),
-        new Attack('Triplattaque', 3, 20, Family.NORMAL),
         new Attack('Etincelle', 0, 13, Family.ELECTRIC),
         new Attack('Picanon', -2, 8, Family.NORMAL),
         new Attack('Onde de choc', -5, 2, Family.ELECTRIC),
@@ -42,7 +39,6 @@ export class AppComponent {
 
     plantAttacks: Array<Attack> = [
         new Attack('Fouet liagne', 4, 22, Family.PLANT),
-        new Attack('Triplattaque', 3, 20, Family.NORMAL),
         new Attack('Spore', -1, 10, Family.PLANT),
         new Attack('Picanon', -2, 8, Family.NORMAL),
         new Attack('Fulmigraine', -6, 1, Family.PLANT),
@@ -51,7 +47,6 @@ export class AppComponent {
 
     normalAttacks: Array<Attack> = [
         new Attack('Feu Follet', 7, 25, Family.FIRE),
-        new Attack('Hydrocanon', 6, 24, Family.WATER),
         new Attack('Eclair', 5, 23, Family.ELECTRIC),
         new Attack('Fouet liagne', 4, 22, Family.PLANT),
         new Attack('Triplattaque', 3, 20, Family.NORMAL),
@@ -80,7 +75,6 @@ export class AppComponent {
     alreadyStart = false;
     isPlaying = false;
 
-
     choosePokemon1(pokemon) {
         this.pokemon1 = pokemon;
     }
@@ -92,7 +86,7 @@ export class AppComponent {
     run() {
         this.isPlaying = true;
         this.alreadyStart = true;
-        // TODO : lunch Fight !
+        this.lunchFight();
     }
 
     stop() {
@@ -102,8 +96,8 @@ export class AppComponent {
 
     lunchFight() {
         // TODO remove two line under this comment
-        this.pokemon1 = new Pokemon('Dracaufeu', 5, Family.FIRE, this.attacks);
-        this.pokemon2 = new Pokemon('Caterpie', 10, Family.PLANT, this.attacks);
+        // this.pokemon1 = new Pokemon('Dracaufeu', 5, Family.FIRE, this.fireAttacks);
+        // this.pokemon2 = new Pokemon('Caterpie', 10, Family.PLANT, this.plantAttacks);
 
         while (this.pokemon1.life > 0 && this.pokemon2.life > 0) {
             const pokemon1Attack = this.pokemon1.getRandomAttack();
