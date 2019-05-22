@@ -8,7 +8,6 @@ export class Logs {
     private _attackFamilyClass: string;
 
     constructor(pokemon: Pokemon, attackLabel: string, attackFamilyClass: string, isWinnerMessage: boolean) {
-        console.log(pokemon.name);
         this._pokemon = pokemon;
         this._attackLabel = attackLabel;
         this._attackFamilyClass = attackFamilyClass;

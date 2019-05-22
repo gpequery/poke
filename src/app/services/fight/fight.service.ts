@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Attack, Family, Pokemon} from "../../models";
+import {Logs} from "../../models/Logs";
 
 @Injectable({
     providedIn: 'root'
@@ -99,16 +100,12 @@ export class FightService  {
         return Math.floor(Math.random() * Math.floor(this.pokemonsList.length))
     }
 
-    addLog(message: string) {
-        this.logs.push(message)
+    addAttackLog(logs: Array<Logs>, pokemon: Pokemon): void {
+        logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
     }
 
-    addAttackLog(pokemon: Pokemon): void {
-        this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
-    }
-
-    addWinnerLog(pokemon: Pokemon) {
-        this.addLog(`<h2>${pokemon.name} Win</h2>`)
+    addWinnerLog(logs: Array<Logs>, pokemon: Pokemon) {
+        logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
     }
 
     stop(isPlaying: boolean, fightInterval: number) {
@@ -116,21 +113,24 @@ export class FightService  {
         clearInterval(fightInterval);
     }
 
-    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, isPlaying: boolean) {
+    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, isPlaying: boolean, logs: Array<Logs>) {
         let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
 
         if (!otherPokemon.isDead()) {
-            this.addAttackLog(currentPokemon);
+            this.addAttackLog(logs, currentPokemon);
             currentPokemon.attack(otherPokemon);
 
             if (otherPokemon.isDead()) {
-                this.addWinnerLog(currentPokemon);
+                this.addWinnerLog(logs, currentPokemon);
                 this.stop(isPlaying, fightInterval);
             }
         }
     }
 
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, isPlaying: boolean){
+    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, isPlaying: boolean, logs: Array<Logs>, alreadyStart: boolean){
+        isPlaying = true;
+        alreadyStart = true;
+
         let currentPokemon;
         let i = 0;
         fightInterval = setInterval(() => {
@@ -142,8 +142,8 @@ export class FightService  {
                 currentPokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
             }
 
-            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, isPlaying);
+            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, isPlaying, logs);
             i++;
-        }, 1000);
+        }, 200);
     }
 }
