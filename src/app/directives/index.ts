@@ -1,3 +1,3 @@
-import {PCustomBgColor} from './pCustomBgColor';
+import {PCustomColor} from './pCustomColor';
 
-export { PCustomBgColor };
+export {PCustomColor};

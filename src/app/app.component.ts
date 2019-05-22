@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Attack, Family, Pokemon} from './models';
 import {FightService} from "./services";
+import {Logs} from "./models/Logs";
 
 @Component({
     selector: 'app-root',
@@ -78,7 +79,7 @@ export class AppComponent {
     title = 'poke';
     pokemon1: Pokemon;
     pokemon2: Pokemon;
-    logs: Array<string> = [];
+    logs: Array<Logs> = [];
     alreadyStart = false;
     isPlaying = false;
 
@@ -126,14 +127,16 @@ export class AppComponent {
     }
 
     addAttackLog(pokemon: Pokemon): void {
-        this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className,false));
+        // this.addLog(`<span class="text-${pokemon.family.className}">${pokemon.name}</span> attaque  <span class="text-${pokemon.currentAttack.family.className}">${pokemon.currentAttack.label}</span>`)
     }
 
     addWinnerLog(pokemon: Pokemon) {
-        this.addLog(`<h2>${pokemon.name} Win</h2>`)
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label,  pokemon.currentAttack.family.className, true));
+        // this.addLog(`<h2>${pokemon.name} Win</h2>`)
     }
 
     addLog(message: string) {
-        this.logs.push(message)
+        // this.logs.push(message);
     }
 }

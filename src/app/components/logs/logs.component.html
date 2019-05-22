@@ -1,3 +1,5 @@
 <div class="logs">
-    <div *ngFor="let log of logs" class="text-center" [innerHTML]="log"></div>
+    <div *ngFor="let log of logs" class="text-center">
+        <span pCustomColor [prefix]="'text'" [className]="log.pokemon.family.className">{{log.pokemon.name}}</span> attaque <span class="text-{{log.attackFamilyClass}}">{{log.attackLabel}}</span>
+    </div>
 </div>
