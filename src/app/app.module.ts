@@ -6,6 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { PCustomBgColor } from './directives';
 import {PkmDataComponent, PokemonListComponent, LogsComponent} from './components';
+import {FightService} from "./services";
 // import { LogColorDirective } from './log-color.directive';
 
 @NgModule({
@@ -16,6 +17,9 @@ import {PkmDataComponent, PokemonListComponent, LogsComponent} from './component
         PCustomBgColor,
         LogsComponent
     ],
+    providers: [
+        FightService,
+        ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -24,7 +28,6 @@ import {PkmDataComponent, PokemonListComponent, LogsComponent} from './component
     exports: [
         PCustomBgColor
     ],
-    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {
