@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Logs} from "../../models";
 
 @Component({
   selector: 'app-logs',
@@ -6,7 +7,7 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent {
-  @Input() logs: Array<string>;
+  @Input() logs: Array<Logs>;
 
   constructor() { }
 }

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Attack, Family, Pokemon} from "../../models";
-import {Logs} from "../../models/Logs";
+import {Attack, Family, Pokemon, Logs} from "../../models";
 
 @Injectable({
     providedIn: 'root'
@@ -17,12 +16,12 @@ export class FightService  {
     plantAttacks: Array<Attack>;
     electricFamily: Family;
     electricAttacks: Array<Attack>;
+    logs: Array<Logs> = [];
     alreadyStart: boolean;
     isPlaying = false;
+    fightInterval: number;
 
     pokemonsList: Array<Pokemon>;
-    private logs = [];
-
 
     constructor() {
         this.initData()
@@ -102,41 +101,40 @@ export class FightService  {
         return Math.floor(Math.random() * Math.floor(this.pokemonsList.length))
     }
 
-    addAttackLog(logs: Array<Logs>, pokemon: Pokemon): void {
-        logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
+    addAttackLog(pokemon: Pokemon): void {
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
     }
 
-    addWinnerLog(logs: Array<Logs>, pokemon: Pokemon) {
-        logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
+    addWinnerLog(pokemon: Pokemon) {
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
     }
 
-    stop(fightInterval: number) {
+    stop() {
         this.isPlaying = false;
-        clearInterval(fightInterval);
+        clearInterval(this.fightInterval);
     }
 
-    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon, fightInterval: number, logs: Array<Logs>) {
+    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon) {
         let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
 
         if (!otherPokemon.isDead()) {
-            this.addAttackLog(logs, currentPokemon);
+            this.addAttackLog(currentPokemon);
             currentPokemon.attack(otherPokemon);
 
             if (otherPokemon.isDead()) {
-                this.addWinnerLog(logs, currentPokemon);
-                this.stop(fightInterval);
+                this.addWinnerLog(currentPokemon);
+                this.stop();
             }
         }
     }
 
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon, fightInterval: number, logs: Array<Logs>){
-        console.log('ici');
+    launchFight(pokemon1: Pokemon, pokemon2: Pokemon){
         this.isPlaying = true;
         this.alreadyStart = true;
 
         let currentPokemon;
         let i = 0;
-        fightInterval = setInterval(() => {
+        this.fightInterval = setInterval(() => {
             if (i%2 === 0) {
                 pokemon1.prepareAttack();
                 pokemon2.prepareAttack();
@@ -145,7 +143,7 @@ export class FightService  {
                 currentPokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
             }
 
-            this.fightLoop(pokemon1, pokemon2, currentPokemon, fightInterval, logs);
+            this.fightLoop(pokemon1, pokemon2, currentPokemon);
             i++;
         }, 200);
     }
