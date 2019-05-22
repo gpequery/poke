@@ -24,7 +24,7 @@ export class FightService  {
     pokemonsList: Array<Pokemon>;
 
     constructor() {
-        this.initData()
+        this.initData();
     }
 
     initData() {

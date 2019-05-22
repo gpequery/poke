@@ -6,6 +6,7 @@ export class Family {
     constructor(label: string, className: string) {
         this._label = label;
         this._className = className;
+        this._weakFamily = [];
     }
 
     get label(): string {
