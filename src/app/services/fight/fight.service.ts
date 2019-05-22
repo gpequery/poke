@@ -34,6 +34,11 @@ export class FightService  {
         this.plantFamily = new Family('Plant', 'success');
         this.electricFamily = new Family('Electric', 'warning');
 
+        this.waterFamily.addWeakFamily(this.fireFamily);
+        this.fireFamily.addWeakFamily(this.plantFamily);
+        this.plantFamily.addWeakFamily(this.waterFamily);
+        this.electricFamily.addWeakFamily(this.waterFamily);
+
         this.fireAttacks = [
             new Attack('Feu Follet', 7, 25, this.fireFamily),
             new Attack('Tacle feu', 2, 19, this.fireFamily),
