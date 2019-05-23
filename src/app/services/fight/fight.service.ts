@@ -47,44 +47,44 @@ export class FightService  {
         this.electricFamily.addWeakFamily(this.waterFamily);
 
         this.fireAttacks = [
-            new Attack('Feu Follet', 7, 25, this.fireFamily),
-            new Attack('Tacle feu', 2, 19, this.fireFamily),
-            new Attack('Picanon', -2, 8, this.normalFamily),
-            new Attack('Feu follet', -3, 6, this.fireFamily),
-            new Attack('Croc de mort', -7, 0, this.normalFamily)
+            new Attack('Feu Follet', 7, 25.2, this.fireFamily),
+            new Attack('Tacle feu', 2, 19.4, this.fireFamily),
+            new Attack('Picanon', -2, 8.6, this.normalFamily),
+            new Attack('Feu follet', -3, 6.7, this.fireFamily),
+            new Attack('Croc de mort', -7, 0.5, this.normalFamily)
         ];
 
         this.watterAttacks = [
-            new Attack('Hydrocanon', 6, 24, this.waterFamily),
-            new Attack('Cascade', 1, 16, this.waterFamily),
-            new Attack('Picanon', -2, 8, this.normalFamily),
-            new Attack('Siphon', -4, 4, this.waterFamily),
-            new Attack('Croc de mort', -7, 0, this.normalFamily)
+            new Attack('Hydrocanon', 6, 24.1, this.waterFamily),
+            new Attack('Cascade', 1, 16.9, this.waterFamily),
+            new Attack('Picanon', -2, 8.4, this.normalFamily),
+            new Attack('Siphon', -4, 4.4, this.waterFamily),
+            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
         ];
 
         this.electricAttacks = [
-            new Attack('Eclair', 5, 23, this.electricFamily),
-            new Attack('Etincelle', 0, 13, this.electricFamily),
-            new Attack('Picanon', -2, 8, this.normalFamily),
-            new Attack('Onde de choc', -5, 2, this.electricFamily),
-            new Attack('Croc de mort', -7, 0, this.normalFamily)
+            new Attack('Eclair', 5, 23.1, this.electricFamily),
+            new Attack('Etincelle', 0, 13.6, this.electricFamily),
+            new Attack('Picanon', -2, 8.3, this.normalFamily),
+            new Attack('Onde de choc', -5, 2.5, this.electricFamily),
+            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
         ];
 
         this.plantAttacks = [
-            new Attack('Fouet liagne', 4, 22, this.plantFamily),
-            new Attack('Spore', -1, 10, this.plantFamily),
-            new Attack('Picanon', -2, 8, this.normalFamily),
-            new Attack('Fulmigraine', -6, 1, this.plantFamily),
-            new Attack('Croc de mort', -7, 0, this.normalFamily)
+            new Attack('Fouet liagne', 4, 22.1, this.plantFamily),
+            new Attack('Spore', -1, 10.4, this.plantFamily),
+            new Attack('Picanon', -2, 8.6, this.normalFamily),
+            new Attack('Fulmigraine', -6, 1.4, this.plantFamily),
+            new Attack('Croc de mort', -7, 0.8, this.normalFamily)
         ];
 
         this.normalAttacks = [
-            new Attack('Feu Follet', 7, 25, this.fireFamily),
-            new Attack('Eclair', 5, 23, this.electricFamily),
-            new Attack('Fouet liagne', 4, 22, this.plantFamily),
-            new Attack('Triplattaque', 3, 20, this.normalFamily),
-            new Attack('Picanon', -2, 8, this.normalFamily),
-            new Attack('Croc de mort', -7, 0, this.normalFamily)
+            new Attack('Feu Follet', 7, 25.1, this.fireFamily),
+            new Attack('Eclair', 5, 23.5, this.electricFamily),
+            new Attack('Fouet liagne', 4, 22.3, this.plantFamily),
+            new Attack('Triplattaque', 3, 20.7, this.normalFamily),
+            new Attack('Picanon', -2, 8.6, this.normalFamily),
+            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
         ];
 
         this.pokemonsList = [
