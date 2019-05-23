@@ -8,10 +8,14 @@ import {Pokemon} from '../../models';
 })
 
 export class PokemonListComponent {
-    constructor() { }
+    constructor() {
+        console.log('Greg');
+        console.log(this.pokemonList);
+    }
 
-    @Input() pokemonList: Array<Pokemon>;
+    @Input() pokemonList: Pokemon[];
     @Output() choosePokemon = new EventEmitter<Pokemon>();
+
 
     handleChange(selectedItem) {
         const pokemon: Pokemon = selectedItem;

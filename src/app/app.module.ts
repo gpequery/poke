@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
-
+import {HttpClientModule} from "@angular/common/http";
 import {FightService} from "./services";
 
 @NgModule({
@@ -23,7 +23,8 @@ import {FightService} from "./services";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
     exports: [
         PCustomColor

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FightService} from "./services";
+import {Component, OnInit} from '@angular/core';
+import {FightService, PokeApiService} from "./services";
 import {Pokemon} from "./models";
 
 @Component({
@@ -8,8 +8,12 @@ import {Pokemon} from "./models";
     styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(private fightService: FightService) {}
+
+    ngOnInit() {
+        this.fightService.initPokemons();
+    }
 
     choosePokemon1(pokemon1) {
         pokemon1.prepareAttack();

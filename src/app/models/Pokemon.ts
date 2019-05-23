@@ -8,12 +8,12 @@ export class Pokemon {
     private _currentAttack: Attack;
     private _attacks: Array<Attack>;
 
-    constructor(name: string, speed: number, family: Family, attacks: Array<Attack>) {
+    constructor(name: string, speed: number, family: Family) {
         this._name = name;
         this._speed = speed;
         this._life = 100;
         this._family = family;
-        this._attacks = attacks;
+        this._attacks = [];
     }
 
     get name(): string {
@@ -62,6 +62,14 @@ export class Pokemon {
 
     set family(family: Family) {
         this._family = family;
+    }
+
+    createAttacks(attacks: Array<Attack>) {
+        this._attacks = attacks
+    }
+
+    addAttack(attack: Attack) {
+        this._attacks.push(attack);
     }
 
     prepareAttack() {

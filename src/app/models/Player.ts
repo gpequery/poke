@@ -18,6 +18,7 @@ export class Player {
     }
 
     addPokemon(newPokemon: Pokemon) {
+        console.log(newPokemon);
         this._pokemons.push(newPokemon);
     }
 

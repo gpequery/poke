@@ -1,3 +1,4 @@
 import {FightService} from './fight/fight.service';
+import {PokeApiService} from './pokeApi/poke-api.service';
 
-export {FightService};
+export {FightService, PokeApiService};
