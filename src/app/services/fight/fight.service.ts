@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Attack, Family, Pokemon, Logs, Player} from "../../models";
-import {interval, Observable, Subscription, fromEvent, merge} from "rxjs";
+import { Observable, Subscription} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -118,8 +118,8 @@ export class FightService implements OnDestroy {
         this.player2.addPokemon(this.pokemonsList[7]);
     }
 
-    addAttackLog(currentPokemon: Pokemon, bonusDamage: boolean): void {
-        this.logs.push(new Logs(currentPokemon, currentPokemon.currentAttack.label, currentPokemon.currentAttack.family.className, bonusDamage,false));
+    addAttackLog(currentPokemon: Pokemon, attackData: any): void {
+        this.logs.push(new Logs(currentPokemon, currentPokemon.currentAttack.label, currentPokemon.currentAttack.family.className, attackData,false));
     }
 
     addPokemonDeadLog(pokemon: Pokemon) {
@@ -178,8 +178,8 @@ export class FightService implements OnDestroy {
         let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
         if (!currentPokemon.isDead() && !otherPokemon.isDead()) {
-            this.addAttackLog(currentPokemon, currentPokemon.currentAttack.isStrong(otherPokemon));
-            currentPokemon.attack(otherPokemon);
+            let attackData = currentPokemon.attack(otherPokemon);
+            this.addAttackLog(currentPokemon, attackData);
 
             if (otherPokemon.isDead()) {
                 this.addPokemonDeadLog(otherPokemon);

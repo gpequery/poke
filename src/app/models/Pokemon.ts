@@ -68,11 +68,16 @@ export class Pokemon {
         this.currentAttack = this.attacks[randomInt(0, this.attacks.length - 1)];
     }
 
-    attack(otherPokemon: Pokemon): boolean {
+    attack(otherPokemon: Pokemon): number[] {
         let damage = this.currentAttack.power;
 
+        let bonus = 1;
         if (this.currentAttack.isStrong(otherPokemon)) {
-            damage *= 2;
+            bonus ++
+        }
+
+        if (bonus) {
+            damage *= bonus;
         }
 
         otherPokemon.life -= damage;
@@ -81,7 +86,7 @@ export class Pokemon {
             otherPokemon.life = 0;
         }
 
-        return otherPokemon.life <= 0;
+        return [damage, bonus];
     }
 
     isFirstToAttack(otherPokemon: Pokemon): boolean {
