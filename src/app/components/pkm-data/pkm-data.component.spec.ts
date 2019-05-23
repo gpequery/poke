@@ -42,9 +42,6 @@ describe('PkmDataComponent', () => {
         fixture.detectChanges();
         nameDisplay = divElement.nativeElement.textContent.trim();
 
-
         expect(nameDisplay).toEqual(pokemon2.name);
-
-
     });
 });
