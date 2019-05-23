@@ -1,4 +1,4 @@
-<div class="logs" style="overflow: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<div class="logs" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div *ngFor="let log of logs" class="text-center">
         <div *ngIf="!log.isWinnerMessage">
             <span pCustomColor [prefix]="'text'" [className]="log.pokemon.family.className">
