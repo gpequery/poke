@@ -23,7 +23,9 @@ describe('LogsComponent', () => {
     let attackData = [50, 2];
 
 
-    component.logs = [ new Logs(pokemon , 'oui', 'NON', attackData , false)
+    component.logs = [ new Logs(pokemon , 'oui', 'NON', attackData , false),
+    new Logs(pokemon , 'oui', 'NON', attackData , false),
+    new Logs(pokemon , 'oui', 'NON', attackData , false)
     ];
 
     fixture.detectChanges();
@@ -40,10 +42,13 @@ describe('LogsComponent', () => {
   it('logs with 1 line are created ', () => {
     const divElement = fixture.debugElement.query(By.css('.logs'));
     let logLine = divElement.nativeElement.textContent.trim();
-    let namePkm = component.logs[0].pokemon.name;
-    let nameAttack = component.logs[0].attackLabel;
-    let damage = component.logs[0].attackData[0];
-    let modifier = component.logs[0].attackData[1];
-    expect(logLine).toContain(namePkm && nameAttack && damage && modifier);
+    for ( let index in component.logs){
+      let namePkm = component.logs[index].pokemon.name;
+      let nameAttack = component.logs[index].attackLabel;
+      let damage = component.logs[index].attackData[0];
+      let modifier = component.logs[index].attackData[1];
+      expect(logLine).toContain(namePkm && nameAttack && damage && modifier);
+    }
+
   });
 });

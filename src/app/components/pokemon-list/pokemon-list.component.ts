@@ -12,6 +12,7 @@ export class PokemonListComponent {
 
     @Input() pokemonList: Array<Pokemon>;
     @Output() choosePokemon = new EventEmitter<Pokemon>();
+    selectPokemonList: any;
 
     handleChange(selectedItem) {
         const pokemon: Pokemon = selectedItem;
