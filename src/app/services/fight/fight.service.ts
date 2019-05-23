@@ -36,12 +36,6 @@ export class FightService implements OnDestroy {
         this.initData();
     }
 
-    launchObserver() {
-        this.fightSubscription = this.fightObservable.subscribe(currentPokemon => {
-            this.fightLoop(currentPokemon);
-        });
-    }
-
     initData() {
         this.player1 = new Player('player 1');
         this.player2 = new Player('player 2');
@@ -128,7 +122,7 @@ export class FightService implements OnDestroy {
         this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
     }
 
-    addWinnerLog(pokemon: Pokemon) {
+    addPokemonDeadLog(pokemon: Pokemon) {
         this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
     }
 
@@ -173,15 +167,21 @@ export class FightService implements OnDestroy {
         }
     }
 
+    launchObserver() {
+        this.fightSubscription = this.fightObservable.subscribe(currentPokemon => {
+            this.fightLoop(currentPokemon);
+        });
+    }
+
     fightLoop(currentPokemon: Pokemon) {
         let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
-        if (!otherPokemon.isDead()) {
+        if (!currentPokemon.isDead() && !otherPokemon.isDead()) {
             this.addAttackLog(currentPokemon);
             currentPokemon.attack(otherPokemon);
 
             if (otherPokemon.isDead()) {
-                this.addWinnerLog(currentPokemon);
+                this.addPokemonDeadLog(otherPokemon);
                 this.stop();
             }
         }
