@@ -34,9 +34,12 @@ describe('PokemonListComponent', () => {
   });
 
   it('Should be desabled', () => {
-    const divElement = fixture.debugElement.query(By.css('.form-control'));
-
-    expect(component).toBeTruthy();
+    for( let index in component.pokemonList) {
+      const divElement = fixture.debugElement.query(By.css('#option-' + component.pokemonList[index].name));
+      component.pokemonList[index].life = 0;
+      fixture.detectChanges();
+      expect(divElement.nativeElement.disabled).toBe(true);
+    }
   });
 
   it('List created', () => {

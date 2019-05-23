@@ -1,3 +1,3 @@
 <select [(ngModel)]="selectPokemonList" class="form-control" (ngModelChange)="handleChange($event)"> // value is an object
-  <option *ngFor="let pokemon of pokemonList" [ngValue]="pokemon" [attr.disabled]="pokemon.isDead() ? '' : null ">{{pokemon.name}} {{pokemon.life | number : '1.2-2'}} PV</option>
+  <option id="option-{{pokemon.name}}" *ngFor="let pokemon of pokemonList" [ngValue]="pokemon" [attr.disabled]="pokemon.isDead() ? '' : null ">{{pokemon.name}} {{pokemon.life | number : '1.2-2'}} PV</option>
 </select>
