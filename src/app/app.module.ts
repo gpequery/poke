@@ -1,13 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
-
 import {FightService} from "./services";
+import {CatalogComponent, FightComponent, HomeComponent} from "./pages";
+import { HeaderComponent } from './shared/layout/';
 
 @NgModule({
     declarations: [
@@ -15,7 +15,11 @@ import {FightService} from "./services";
         PkmDataComponent,
         PokemonListComponent,
         PCustomColor,
-        LogsComponent
+        LogsComponent,
+        CatalogComponent,
+        FightComponent,
+        HeaderComponent,
+        HomeComponent,
     ],
     providers: [
         FightService,
@@ -23,7 +27,7 @@ import {FightService} from "./services";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
     ],
     exports: [
         PCustomColor

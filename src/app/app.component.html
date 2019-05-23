@@ -1,36 +1,3 @@
-<div class="row container-full data-container">
-    <div class="col-3 text-left font-weight-bold text-white">
-        {{ fightService.startDate | date : "dd-MM-yy HH:mm:ss" }}
-    </div>
-    <div class="col-6 text-center">
-        <h2 *ngIf="fightService.winner" class="font-weight-bold text-primary">The winner is {{fightService.winner.name}} !</h2>
-    </div>
-    <div class="col-3 text-right font-weight-bold text-white">
-        {{ fightService.endDate | date : "dd-MM-yy HH:mm:ss" }}
-    </div>
-</div>
-
-<div class="row container-full fight-container">
-    <div class="col-3">
-        <app-pokemon-list *ngIf="(!fightService.alreadyStart) || (!fightService.isPlaying && fightService.player1.haveAlivePokemon())"
-                          [pokemonList]="fightService.player1.pokemons"
-                          (choosePokemon)="choosePokemon1($event)"></app-pokemon-list>
-        <app-pkm-data *ngIf="fightService.pokemon1" [pokemon]="fightService.pokemon1" [ngStyle]="{'opacity': fightService.pokemon1 && fightService.pokemon1.isDead() ? '0.3' : '1' }" class="pokemonData"></app-pkm-data>
-    </div>
-
-    <div class="col-6 position-relative text-white" id="fight">
-        <app-logs [logs]="fightService.logs" ></app-logs>
-        <div *ngIf="fightService.pokemon1 && fightService.pokemon2 && !fightService.pokemon1.isDead() && !fightService.pokemon2.isDead()" id="action">
-            <img *ngIf="!fightService.isPlaying" src="../assets/play.png" id="start-fight" (click)="run()">
-            <img *ngIf="fightService.isPlaying" src="../assets/pause.png" id="stop-fight" (click)="stop()">
-        </div>
-    </div>
-
-    <div class="col-3">
-        <app-pokemon-list *ngIf="(!fightService.alreadyStart) || (!fightService.isPlaying && fightService.player2.haveAlivePokemon())" [pokemonList]="fightService.player2.pokemons"
-                          (choosePokemon)="choosePokemon2($event)"></app-pokemon-list>
-        <app-pkm-data *ngIf="fightService.pokemon2" [pokemon]="fightService.pokemon2" [ngStyle]="{'opacity': fightService.pokemon2 && fightService.pokemon2.isDead() ? '0.2' : '1' }" class="pokemonData"></app-pkm-data>
-    </div>
-</div>
+<app-header></app-header>
 
 <router-outlet></router-outlet>
