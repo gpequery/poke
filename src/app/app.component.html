@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-6 position-relative text-white" id="fight">
-        <app-logs [logs]="fightService.logs" ></app-logs>
+        <app-logs [logs]="fightService.logs"></app-logs>
         <div *ngIf="fightService.pokemon1 && fightService.pokemon2 && !fightService.pokemon1.isDead() && !fightService.pokemon2.isDead()" id="action">
             <img *ngIf="!fightService.isPlaying" src="../assets/play.png" id="start-fight" (click)="run()">
             <img *ngIf="fightService.isPlaying" src="../assets/pause.png" id="stop-fight" (click)="stop()">

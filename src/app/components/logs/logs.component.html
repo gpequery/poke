@@ -5,8 +5,8 @@
                 {{log.pokemon.name}}
             </span>
             attaque
-            <span
-                class="text-{{log.attackFamilyClass}}">{{log.attackLabel}}
+            <span class="text-{{log.attackFamilyClass}}">
+              {{log.attackLabel}}
             </span>
             <span *ngIf="log.attackData">
                 - {{log.getAttackDamage()}} (x{{log.getAttackBonus()}})
