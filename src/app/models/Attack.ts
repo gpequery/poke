@@ -1,4 +1,5 @@
 import {Family} from './Family';
+import {Pokemon} from "./Pokemon";
 
 export class Attack {
     private _label: string;
@@ -43,5 +44,9 @@ export class Attack {
 
     set family(family: Family) {
         this._family = family
+    }
+
+    isStrong(otherPokemon: Pokemon): boolean {
+        return this.family.weakFamilies.includes(otherPokemon.family);
     }
 }

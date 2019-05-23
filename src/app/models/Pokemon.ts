@@ -69,7 +69,13 @@ export class Pokemon {
     }
 
     attack(otherPokemon: Pokemon): boolean {
-        otherPokemon.life -= this.currentAttack.power;
+        let damage = this.currentAttack.power;
+
+        if (this.currentAttack.isStrong(otherPokemon)) {
+            damage *= 2;
+        }
+
+        otherPokemon.life -= damage;
 
         if (otherPokemon.life < 0) {
             otherPokemon.life = 0;

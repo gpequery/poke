@@ -46,10 +46,10 @@ export class FightService implements OnDestroy {
         this.plantFamily = new Family('Plant', 'success');
         this.electricFamily = new Family('Electric', 'warning');
 
-        this.waterFamily.addWeakFamily(this.fireFamily);
-        this.fireFamily.addWeakFamily(this.plantFamily);
-        this.plantFamily.addWeakFamily(this.waterFamily);
-        this.electricFamily.addWeakFamily(this.waterFamily);
+        this.waterFamily.addWeakFamilies(this.fireFamily);
+        this.fireFamily.addWeakFamilies(this.plantFamily);
+        this.plantFamily.addWeakFamilies(this.waterFamily);
+        this.electricFamily.addWeakFamilies(this.waterFamily);
 
         this.fireAttacks = [
             new Attack('Feu Follet', 7, 25.2, this.fireFamily),
@@ -118,12 +118,12 @@ export class FightService implements OnDestroy {
         this.player2.addPokemon(this.pokemonsList[7]);
     }
 
-    addAttackLog(pokemon: Pokemon): void {
-        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, false));
+    addAttackLog(currentPokemon: Pokemon, bonusDamage: boolean): void {
+        this.logs.push(new Logs(currentPokemon, currentPokemon.currentAttack.label, currentPokemon.currentAttack.family.className, bonusDamage,false));
     }
 
     addPokemonDeadLog(pokemon: Pokemon) {
-        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, true));
+        this.logs.push(new Logs(pokemon, pokemon.currentAttack.label, pokemon.currentAttack.family.className, null, true));
     }
 
     stop() {
@@ -178,7 +178,7 @@ export class FightService implements OnDestroy {
         let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
         if (!currentPokemon.isDead() && !otherPokemon.isDead()) {
-            this.addAttackLog(currentPokemon);
+            this.addAttackLog(currentPokemon, currentPokemon.currentAttack.isStrong(otherPokemon));
             currentPokemon.attack(otherPokemon);
 
             if (otherPokemon.isDead()) {

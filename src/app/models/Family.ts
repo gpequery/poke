@@ -1,12 +1,12 @@
 export class Family {
     private _label: string;
     private _className: string;
-    private _weakFamily: Array<Family>;
+    private _weakFamilies: Array<Family>;
 
     constructor(label: string, className: string) {
         this._label = label;
         this._className = className;
-        this._weakFamily = [];
+        this._weakFamilies = [];
     }
 
     get label(): string {
@@ -25,7 +25,11 @@ export class Family {
         this._className = className
     }
 
-    addWeakFamily(family: Family) {
-        this._weakFamily.push(family);
+    get weakFamilies(): Array<Family> {
+        return this._weakFamilies
+    }
+
+    addWeakFamilies(family: Family) {
+        this._weakFamilies.push(family);
     }
 }

@@ -5,12 +5,14 @@ export class Logs {
     private _isWinnerMessage: boolean;
     private _attackLabel: string;
     private _attackFamilyClass: string;
+    private _bonusDamage: boolean;
 
-    constructor(pokemon: Pokemon, attackLabel: string, attackFamilyClass: string, isWinnerMessage: boolean) {
+    constructor(pokemon: Pokemon, attackLabel: string, attackFamilyClass: string, bonusDamage: boolean, isWinnerMessage: boolean) {
         this._pokemon = pokemon;
         this._attackLabel = attackLabel;
         this._attackFamilyClass = attackFamilyClass;
         this._isWinnerMessage = isWinnerMessage;
+        this._bonusDamage = bonusDamage;
     }
 
     get attackLabel(): string {
@@ -23,6 +25,10 @@ export class Logs {
 
     get pokemon(): Pokemon {
         return this._pokemon
+    }
+
+    get bonusDamage(): boolean {
+        return this._bonusDamage;
     }
 
     get isWinnerMessage(): boolean {

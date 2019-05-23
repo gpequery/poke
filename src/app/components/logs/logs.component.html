@@ -1,8 +1,14 @@
 <div class="logs">
     <div *ngFor="let log of logs" class="text-center">
         <div *ngIf="!log.isWinnerMessage">
-            <span pCustomColor [prefix]="'text'" [className]="log.pokemon.family.className">{{log.pokemon.name}}</span> attaque <span
-                class="text-{{log.attackFamilyClass}}">{{log.attackLabel}}</span>
+            <span pCustomColor [prefix]="'text'" [className]="log.pokemon.family.className">
+                {{log.pokemon.name}}
+            </span>
+            attaque
+            <span
+                class="text-{{log.attackFamilyClass}}">{{log.attackLabel}}
+            </span>
+            <span *ngIf="log.bonusDamage">(x2)</span>
         </div>
 
         <h2 *ngIf="log.isWinnerMessage" class="mt-1 mb-3 font-weight-bold text-danger">{{log.pokemon.name}} dead !</h2>
