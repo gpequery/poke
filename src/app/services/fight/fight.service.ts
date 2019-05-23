@@ -140,6 +140,7 @@ export class FightService implements OnDestroy {
         this.isPlaying = true;
 
         if (!this.alreadyStart) {
+            this.startDate = new Date();
             this.alreadyStart = true;
 
             this.fightObservable = new Observable(observer => {
@@ -188,7 +189,7 @@ export class FightService implements OnDestroy {
     }
 
     getWinner() {
-        return this.player1.haveAlivePokemon() ? this.player2 : this.player1
+        return this.player1.haveAlivePokemon() ? this.player1 : this.player2
     }
 
     isEnd() {
