@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FightService} from "./services";
-import {Logs} from "./models/Logs";
-import {Player, Pokemon} from "./models";
+import {Pokemon} from "./models";
 
 @Component({
     selector: 'app-root',
@@ -24,7 +23,7 @@ export class AppComponent {
     }
 
     run() {
-        this.fightService.launchFight(this.pokemon1, this.pokemon2);
+        this.fightService.run(this.pokemon1, this.pokemon2);
     }
 
     stop() {

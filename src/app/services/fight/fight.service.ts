@@ -21,6 +21,9 @@ export class FightService  {
     alreadyStart: boolean;
     isPlaying = false;
     fightInterval: number;
+    startDate: Date;
+    endDate: Date;
+    winner: Player;
 
     pokemonsList: Array<Pokemon>;
 
@@ -121,6 +124,15 @@ export class FightService  {
     stop() {
         this.isPlaying = false;
         clearInterval(this.fightInterval);
+
+        if (this.isEnd()) {
+            this.winner = this.getWinner();
+            this.endDate = new Date();
+        }
+    }
+
+    run(pokemon1: Pokemon, pokemon2: Pokemon) {
+        this.launchFight(pokemon1, pokemon2);
     }
 
     fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon) {
@@ -137,7 +149,12 @@ export class FightService  {
         }
     }
 
+
     launchFight(pokemon1: Pokemon, pokemon2: Pokemon) {
+        if (!this.alreadyStart) {
+            this.startDate = new Date();
+        }
+
         this.isPlaying = true;
         this.alreadyStart = true;
 
@@ -155,5 +172,13 @@ export class FightService  {
             this.fightLoop(pokemon1, pokemon2, currentPokemon);
             i++;
         }, 50);
+    }
+
+    getWinner() {
+        return this.player1.haveAlivePokemon() ? this.player2 : this.player1
+    }
+
+    isEnd() {
+        return !this.player1.haveAlivePokemon() || !this.player2.haveAlivePokemon();
     }
 }
