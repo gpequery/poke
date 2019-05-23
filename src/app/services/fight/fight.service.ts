@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Attack, Family, Pokemon, Logs, Player} from "../../models";
+import {interval, Observable, Subscription, fromEvent, merge} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class FightService  {
+export class FightService implements OnDestroy {
     player1: Player;
     player2: Player;
     normalFamily: Family;
@@ -20,15 +21,25 @@ export class FightService  {
     logs: Array<Logs> = [];
     alreadyStart: boolean;
     isPlaying = false;
-    fightInterval: number;
     startDate: Date;
     endDate: Date;
     winner: Player;
+    round: number = -1;
+    fightSubscription: Subscription;
+    fightObservable: Observable<any>;
+    pokemon1: Pokemon;
+    pokemon2: Pokemon;
 
     pokemonsList: Array<Pokemon>;
 
     constructor() {
         this.initData();
+    }
+
+    launchObserver() {
+        this.fightSubscription = this.fightObservable.subscribe(currentPokemon => {
+            this.fightLoop(currentPokemon);
+        });
     }
 
     initData() {
@@ -123,7 +134,7 @@ export class FightService  {
 
     stop() {
         this.isPlaying = false;
-        clearInterval(this.fightInterval);
+        this.fightSubscription.unsubscribe();
 
         if (this.isEnd()) {
             this.winner = this.getWinner();
@@ -131,12 +142,39 @@ export class FightService  {
         }
     }
 
-    run(pokemon1: Pokemon, pokemon2: Pokemon) {
-        this.launchFight(pokemon1, pokemon2);
+    run() {
+        this.isPlaying = true;
+
+        if (!this.alreadyStart) {
+            this.alreadyStart = true;
+
+            this.fightObservable = new Observable(observer => {
+                let currentPokemon: Pokemon;
+
+                const interval = setInterval(() => observer.next(currentPokemon = this.getNextPokemon(currentPokemon)), 50);
+                return () => {
+                    observer.complete();
+                    clearInterval(interval);
+                };
+            });
+        }
+
+        this.launchObserver();
     }
 
-    fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon) {
-        let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
+    getNextPokemon(currentPokemon: Pokemon): Pokemon {
+        if (++this.round%2 === 0) {
+            this.pokemon1.prepareAttack();
+            this.pokemon2.prepareAttack();
+
+            return this.pokemon1.isFirstToAttack(this.pokemon2) ? this.pokemon1 : this.pokemon2;
+        } else {
+            return currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
+        }
+    }
+
+    fightLoop(currentPokemon: Pokemon) {
+        let otherPokemon: Pokemon = currentPokemon === this.pokemon1 ? this.pokemon2 : this.pokemon1;
 
         if (!otherPokemon.isDead()) {
             this.addAttackLog(currentPokemon);
@@ -149,31 +187,6 @@ export class FightService  {
         }
     }
 
-
-    launchFight(pokemon1: Pokemon, pokemon2: Pokemon) {
-        if (!this.alreadyStart) {
-            this.startDate = new Date();
-        }
-
-        this.isPlaying = true;
-        this.alreadyStart = true;
-
-        let currentPokemon;
-        let i = 0;
-        this.fightInterval = setInterval(() => {
-            if (i%2 === 0) {
-                pokemon1.prepareAttack();
-                pokemon2.prepareAttack();
-                currentPokemon = pokemon1.isFirstToAttack(pokemon2) ? pokemon1 : pokemon2;
-            } else {
-                currentPokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
-            }
-
-            this.fightLoop(pokemon1, pokemon2, currentPokemon);
-            i++;
-        }, 50);
-    }
-
     getWinner() {
         return this.player1.haveAlivePokemon() ? this.player2 : this.player1
     }
@@ -181,4 +194,6 @@ export class FightService  {
     isEnd() {
         return !this.player1.haveAlivePokemon() || !this.player2.haveAlivePokemon();
     }
+
+    ngOnDestroy() { this.fightSubscription.unsubscribe(); }
 }

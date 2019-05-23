@@ -9,24 +9,25 @@ import {Pokemon} from "./models";
 })
 
 export class AppComponent {
-    pokemon1: Pokemon;
-    pokemon2: Pokemon;
-
     constructor(private fightService: FightService) {}
 
-    choosePokemon1(pokemon) {
-        this.pokemon1 = pokemon;
+    choosePokemon1(pokemon1) {
+        pokemon1.prepareAttack();
+        this.fightService.pokemon1 = pokemon1;
     }
 
-    choosePokemon2(pokemon) {
-        this.pokemon2 = pokemon;
+    choosePokemon2(pokemon2) {
+        pokemon2.prepareAttack();
+        this.fightService.pokemon2 = pokemon2;
     }
 
     run() {
-        this.fightService.run(this.pokemon1, this.pokemon2);
+        this.fightService.run();
+        // this.fightService.testRun();
     }
 
     stop() {
         this.fightService.stop();
+        // this.fightService.testStop();
     }
 }

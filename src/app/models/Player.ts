@@ -29,8 +29,6 @@ export class Player {
             }
         });
 
-        console.log(result);
-
         return result;
     }
 }
