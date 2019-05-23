@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Attack, Family, Pokemon, Logs, Player} from "../../models";
+import {Attack, Family, Pokemon, Logs, Player} from '../../models';
+import {HttpClient} from '@angular/common/http';
+
 
 @Injectable({
     providedIn: 'root'
@@ -26,8 +28,9 @@ export class FightService  {
     winner: Player;
 
     pokemonsList: Array<Pokemon>;
+    url = 'https://pokeapi.co/api/v2/';
 
-    constructor() {
+    constructor(private httpClient: HttpClient) {
         this.initData();
     }
 
@@ -133,10 +136,11 @@ export class FightService  {
 
     run(pokemon1: Pokemon, pokemon2: Pokemon) {
         this.launchFight(pokemon1, pokemon2);
+        this.testHTTP();
     }
 
     fightLoop(pokemon1: Pokemon, pokemon2: Pokemon, currentPokemon: Pokemon) {
-        let otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
+        const otherPokemon: Pokemon = currentPokemon === pokemon1 ? pokemon2 : pokemon1;
 
         if (!otherPokemon.isDead()) {
             this.addAttackLog(currentPokemon);
@@ -161,7 +165,7 @@ export class FightService  {
         let currentPokemon;
         let i = 0;
         this.fightInterval = setInterval(() => {
-            if (i%2 === 0) {
+            if (i % 2 === 0) {
                 pokemon1.prepareAttack();
                 pokemon2.prepareAttack();
                 currentPokemon = pokemon1.isFirstToAttack(pokemon2) ? pokemon1 : pokemon2;
@@ -175,10 +179,23 @@ export class FightService  {
     }
 
     getWinner() {
-        return this.player1.haveAlivePokemon() ? this.player2 : this.player1
+        return this.player1.haveAlivePokemon() ? this.player2 : this.player1;
     }
 
     isEnd() {
         return !this.player1.haveAlivePokemon() || !this.player2.haveAlivePokemon();
     }
+
+  testHTTP() {
+      let pokemonTest;
+      this.httpClient.get(this.url + 'pokemon/4'
+        ).subscribe((response) => {
+          if (response) {
+              const name = response.name;
+              return pokemonTest = new Pokemon(name, 5 , this.fireFamily, this.fireAttacks);
+          } else {
+            console.log('Erreur');
+          }
+        });
+      }
 }

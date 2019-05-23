@@ -8,6 +8,8 @@ import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
 
 import {FightService} from "./services";
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
     declarations: [
@@ -19,10 +21,12 @@ import {FightService} from "./services";
     ],
     providers: [
         FightService,
+        HttpClientModule
         ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         FormsModule
     ],
     exports: [
