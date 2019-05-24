@@ -1,9 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 
 import {FightService} from './fight.service';
-import {Attack, Family, Logs, Pokemon} from "../../models";
+import {Attack, Family, Logs, Player, Pokemon} from "../../models";
 
 describe('FightService', () => {
+    let player1 = new Player('player 1');
+    let player2 = new Player('player 2');
     let family1 = new Family('fire', 'success');
     let pokemon1 = new Pokemon('myName1', 50, family1, [new Attack('Feu Follet', 7, 25.2, family1)]);
     let pokemon2 = new Pokemon('myName2', 50, family1, [new Attack('Tacle feu', 2, 19.4, family1)]);
@@ -27,8 +29,9 @@ describe('FightService', () => {
     it('should init pokemon player', () => {
         const service: FightService = TestBed.get(FightService);
 
-        service.initData();
-        // service.initPlayerPokemons();
+        service.player1 = player1;
+        service.player2 = player2;
+        service.initPlayerPokemons();
 
         expect(service.player1.pokemons.length).toBeGreaterThan(0);
         expect(service.player2.pokemons.length).toBeGreaterThan(0);
@@ -96,7 +99,6 @@ describe('FightService', () => {
         expect(service.startDate).toBeUndefined();
         expect(service.fightObservable).toBeFalsy();
         expect(service.fightSubscription).toBeUndefined();
-        console.log(service.startDate);
 
         service.run();
 
