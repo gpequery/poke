@@ -3,7 +3,7 @@
         {{ fightService.startDate | date : "dd-MM-yy HH:mm:ss" }}
     </div>
     <div class="col-6 text-center">
-        <h2 *ngIf="fightService.winner" class="font-weight-bold text-primary">The winner is {{fightService.winner.name}} !</h2>
+        <h2 id="winnerPlayer" *ngIf="fightService.winner" class="font-weight-bold text-primary">The winner is {{fightService.winner.name}} !</h2>
     </div>
     <div class="col-3 text-right font-weight-bold text-white">
         {{ fightService.endDate | date : "dd-MM-yy HH:mm:ss" }}
