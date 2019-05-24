@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FightService} from "../../services";
+import {FightService, PokedexService} from "../../services";
 import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
@@ -11,11 +11,12 @@ export class FightComponent implements OnInit {
     pokemonId1: number;
     pokemonId2: number;
 
-    constructor(private fightService: FightService, private route: ActivatedRoute) {}
+    constructor(private fightService: FightService, private route: ActivatedRoute, private pokedex: PokedexService) {}
 
     ngOnInit() {
         this.route.params
             .subscribe((params: Params): void => {
+                console.log(this.pokedex.getPokemon(500));
                 this.pokemonId1 = Number(params.pokemonId1);
                 this.pokemonId2 = Number(params.pokemonId2);
             });

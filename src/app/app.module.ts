@@ -5,9 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PCustomColor} from './directives';
 import {LogsComponent, PkmDataComponent, PokemonListComponent} from './components';
-import {FightService} from "./services";
+import {FightService, PokedexService} from "./services";
 import {CatalogComponent, FightComponent, HomeComponent} from "./pages";
 import { HeaderComponent } from './shared/layout/';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -23,11 +24,13 @@ import { HeaderComponent } from './shared/layout/';
     ],
     providers: [
         FightService,
+        PokedexService,
         ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        HttpClientModule,
     ],
     exports: [
         PCustomColor

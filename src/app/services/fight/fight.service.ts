@@ -1,6 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Attack, Family, Pokemon, Logs, Player} from "../../models";
-import {interval, Observable, Subscription, fromEvent, merge} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+
 
 @Injectable({
     providedIn: 'root'
