@@ -9,7 +9,7 @@ import {Pokemon} from "./models";
 })
 
 export class AppComponent {
-    constructor(private fightService: FightService) {}
+    constructor(public fightService: FightService) {}
 
     choosePokemon1(pokemon1) {
         pokemon1.prepareAttack();
