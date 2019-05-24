@@ -72,7 +72,7 @@ describe('AppComponent', () => {
     fightService.isEnd();
     console.log(fightService.endDate);
     fixture.detectChanges();
-    const divElement = fixture.debugElement.query(By.css('#beginHour'));
+    const divElement = fixture.debugElement.query(By.css('#endHour'));
     let hourLine = divElement.nativeElement.textContent.trim();
     console.log(hourLine);
 
