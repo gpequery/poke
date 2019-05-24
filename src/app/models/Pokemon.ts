@@ -7,12 +7,14 @@ export class Pokemon {
     private _family: Family;
     private _currentAttack: Attack;
     private _attacks: Array<Attack>;
+    private _image: string;
 
-    constructor(name: string, speed: number, family: Family, attacks: Array<Attack>) {
+    constructor(name: string, speed: number, family: Family, image: string, attacks: Array<Attack>) {
         this._name = name;
         this._speed = speed;
         this._life = 100;
         this._family = family;
+        this._image = image;
         this._attacks = attacks;
     }
 
@@ -40,6 +42,14 @@ export class Pokemon {
         this._life = life;
     }
 
+    get image(): string {
+        return this._image;
+    }
+
+    set image(image: string) {
+        this._image = image;
+    }
+
     get attacks(): Array<Attack> {
         return this._attacks;
     }
@@ -62,6 +72,10 @@ export class Pokemon {
 
     set family(family: Family) {
         this._family = family;
+    }
+
+    addAttack(attack: Attack) {
+        this._attacks.push(attack);
     }
 
     prepareAttack() {

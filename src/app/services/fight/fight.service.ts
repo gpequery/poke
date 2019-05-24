@@ -1,6 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Attack, Family, Pokemon, Logs, Player} from "../../models";
 import { Observable, Subscription} from "rxjs";
+import {PokedexService} from "..";
 
 @Injectable({
     providedIn: 'root'
@@ -40,70 +41,70 @@ export class FightService implements OnDestroy {
         this.player1 = new Player('Player 1');
         this.player2 = new Player('Player 2');
 
-        this.normalFamily = new Family('Normal', 'secondary');
-        this.fireFamily = new Family('Fire', 'danger');
-        this.waterFamily = new Family('Water', 'info');
-        this.plantFamily = new Family('Plant', 'success');
-        this.electricFamily = new Family('Electric', 'warning');
-
-        this.waterFamily.addWeakFamilies(this.fireFamily);
-        this.fireFamily.addWeakFamilies(this.plantFamily);
-        this.plantFamily.addWeakFamilies(this.waterFamily);
-        this.electricFamily.addWeakFamilies(this.waterFamily);
-
-        this.fireAttacks = [
-            new Attack('Feu Follet', 7, 25.2, this.fireFamily),
-            new Attack('Tacle feu', 2, 19.4, this.fireFamily),
-            new Attack('Picanon', -2, 8.6, this.normalFamily),
-            new Attack('Feu follet', -3, 6.7, this.fireFamily),
-            new Attack('Croc de mort', -7, 0.5, this.normalFamily)
-        ];
-
-        this.watterAttacks = [
-            new Attack('Hydrocanon', 6, 24.1, this.waterFamily),
-            new Attack('Cascade', 1, 16.9, this.waterFamily),
-            new Attack('Picanon', -2, 8.4, this.normalFamily),
-            new Attack('Siphon', -4, 4.4, this.waterFamily),
-            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
-        ];
-
-        this.electricAttacks = [
-            new Attack('Eclair', 5, 23.1, this.electricFamily),
-            new Attack('Etincelle', 0, 13.6, this.electricFamily),
-            new Attack('Picanon', -2, 8.3, this.normalFamily),
-            new Attack('Onde de choc', -5, 2.5, this.electricFamily),
-            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
-        ];
-
-        this.plantAttacks = [
-            new Attack('Fouet liagne', 4, 22.1, this.plantFamily),
-            new Attack('Spore', -1, 10.4, this.plantFamily),
-            new Attack('Picanon', -2, 8.6, this.normalFamily),
-            new Attack('Fulmigraine', -6, 1.4, this.plantFamily),
-            new Attack('Croc de mort', -7, 0.8, this.normalFamily)
-        ];
-
-        this.normalAttacks = [
-            new Attack('Feu Follet', 7, 25.1, this.fireFamily),
-            new Attack('Eclair', 5, 23.5, this.electricFamily),
-            new Attack('Fouet liagne', 4, 22.3, this.plantFamily),
-            new Attack('Triplattaque', 3, 20.7, this.normalFamily),
-            new Attack('Picanon', -2, 8.6, this.normalFamily),
-            new Attack('Croc de mort', -7, 0.9, this.normalFamily)
-        ];
-
-        this.pokemonsList = [
-            new Pokemon('Dracaufeu', 5, this.fireFamily, this.fireAttacks),
-            new Pokemon('Magicarpe', 20, this.waterFamily, this.watterAttacks),
-            new Pokemon('Caterpie', 10, this.plantFamily, this.plantAttacks),
-            new Pokemon('Voltali', 15, this.electricFamily, this.electricAttacks),
-            new Pokemon('Chetiflor', 5, this.plantFamily, this.plantAttacks),
-            new Pokemon('Roucool', 20, this.normalFamily, this.normalAttacks),
-            new Pokemon('Magmar', 10, this.fireFamily, this.fireAttacks),
-            new Pokemon('Tentacool', 15, this.waterFamily, this.watterAttacks)
-        ];
-
-        this.initPlayerPokemons();
+        // this.normalFamily = new Family('Normal', 'secondary');
+        // this.fireFamily = new Family('Fire', 'danger');
+        // this.waterFamily = new Family('Water', 'info');
+        // this.plantFamily = new Family('Plant', 'success');
+        // this.electricFamily = new Family('Electric', 'warning');
+        //
+        // this.waterFamily.addWeakFamilies(this.fireFamily);
+        // this.fireFamily.addWeakFamilies(this.plantFamily);
+        // this.plantFamily.addWeakFamilies(this.waterFamily);
+        // this.electricFamily.addWeakFamilies(this.waterFamily);
+        //
+        // this.fireAttacks = [
+        //     new Attack('Feu Follet', 7, 25.2, this.fireFamily),
+        //     new Attack('Tacle feu', 2, 19.4, this.fireFamily),
+        //     new Attack('Picanon', -2, 8.6, this.normalFamily),
+        //     new Attack('Feu follet', -3, 6.7, this.fireFamily),
+        //     new Attack('Croc de mort', -7, 0.5, this.normalFamily)
+        // ];
+        //
+        // this.watterAttacks = [
+        //     new Attack('Hydrocanon', 6, 24.1, this.waterFamily),
+        //     new Attack('Cascade', 1, 16.9, this.waterFamily),
+        //     new Attack('Picanon', -2, 8.4, this.normalFamily),
+        //     new Attack('Siphon', -4, 4.4, this.waterFamily),
+        //     new Attack('Croc de mort', -7, 0.9, this.normalFamily)
+        // ];
+        //
+        // this.electricAttacks = [
+        //     new Attack('Eclair', 5, 23.1, this.electricFamily),
+        //     new Attack('Etincelle', 0, 13.6, this.electricFamily),
+        //     new Attack('Picanon', -2, 8.3, this.normalFamily),
+        //     new Attack('Onde de choc', -5, 2.5, this.electricFamily),
+        //     new Attack('Croc de mort', -7, 0.9, this.normalFamily)
+        // ];
+        //
+        // this.plantAttacks = [
+        //     new Attack('Fouet liagne', 4, 22.1, this.plantFamily),
+        //     new Attack('Spore', -1, 10.4, this.plantFamily),
+        //     new Attack('Picanon', -2, 8.6, this.normalFamily),
+        //     new Attack('Fulmigraine', -6, 1.4, this.plantFamily),
+        //     new Attack('Croc de mort', -7, 0.8, this.normalFamily)
+        // ];
+        //
+        // this.normalAttacks = [
+        //     new Attack('Feu Follet', 7, 25.1, this.fireFamily),
+        //     new Attack('Eclair', 5, 23.5, this.electricFamily),
+        //     new Attack('Fouet liagne', 4, 22.3, this.plantFamily),
+        //     new Attack('Triplattaque', 3, 20.7, this.normalFamily),
+        //     new Attack('Picanon', -2, 8.6, this.normalFamily),
+        //     new Attack('Croc de mort', -7, 0.9, this.normalFamily)
+        // ];
+        //
+        // this.pokemonsList = [
+        //     new Pokemon('Dracaufeu', 5, this.fireFamily, this.fireAttacks),
+        //     new Pokemon('Magicarpe', 20, this.waterFamily, this.watterAttacks),
+        //     new Pokemon('Caterpie', 10, this.plantFamily, this.plantAttacks),
+        //     new Pokemon('Voltali', 15, this.electricFamily, this.electricAttacks),
+        //     new Pokemon('Chetiflor', 5, this.plantFamily, this.plantAttacks),
+        //     new Pokemon('Roucool', 20, this.normalFamily, this.normalAttacks),
+        //     new Pokemon('Magmar', 10, this.fireFamily, this.fireAttacks),
+        //     new Pokemon('Tentacool', 15, this.waterFamily, this.watterAttacks)
+        // ];
+        //
+        // this.initPlayerPokemons();
     }
 
     initPlayerPokemons() {

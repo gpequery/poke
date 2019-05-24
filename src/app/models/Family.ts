@@ -3,9 +3,9 @@ export class Family {
     private _className: string;
     private _weakFamilies: Array<Family>;
 
-    constructor(label: string, className: string) {
+    constructor(label: string) {
         this._label = label;
-        this._className = className;
+        this._className = this.getFamilyClass();
         this._weakFamilies = [];
     }
 
@@ -31,5 +31,22 @@ export class Family {
 
     addWeakFamilies(family: Family) {
         this._weakFamilies.push(family);
+    }
+
+    getFamilyClass(): string {
+        switch (this._label) {
+            case 'poison':
+                return 'poison';
+            case 'fire':
+                return 'danger';
+            case 'water':
+                return 'primary';
+            case 'electric':
+                return 'warning';
+            case 'flying':
+                return 'secondary';
+            case 'grass':
+                return 'success';
+        }
     }
 }
