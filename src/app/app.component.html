@@ -1,11 +1,11 @@
 <div class="row container-full data-container">
-    <div class="col-3 text-left font-weight-bold text-white" id="beginHour">
+    <div class="col-3 text-left font-weight-bold text-white" id="startDate">
         {{ fightService.startDate | date : "dd-MM-yy HH:mm:ss" }}
     </div>
     <div class="col-6 text-center">
         <h2 id="winnerPlayer" *ngIf="fightService.winner" class="font-weight-bold text-primary">The winner is {{fightService.winner.name}} !</h2>
     </div>
-    <div class="col-3 text-right font-weight-bold text-white" id="endHour">
+    <div class="col-3 text-right font-weight-bold text-white" id="endDate">
         {{ fightService.endDate | date : "dd-MM-yy HH:mm:ss" }}
     </div>
 </div>

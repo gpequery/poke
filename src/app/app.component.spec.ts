@@ -5,12 +5,14 @@ import {LogsComponent, PkmDataComponent, PokemonListComponent} from "./component
 import {FormsModule} from "@angular/forms";
 import {PCustomColor} from "./directives";
 import {By} from "@angular/platform-browser";
-import {FightService} from "./services";
-import {Family, Player, Pokemon} from "./models";
+import {Player} from "./models";
 
 describe('AppComponent', () => {
     let component: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
+    let date = new Date(2019, 0, 1, 20, 30, 40);
+    let player1 = new Player('player 1');
+    let player2 = new Player('player 2');
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -40,51 +42,42 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it('Test beginin hour', () => {
-        const app = fixture.debugElement.componentInstance;
-
+    it('Test start date', () => {
         expect(component.fightService.startDate).toBeUndefined();
 
-        component.fightService.startDate = new Date();
+        component.fightService.startDate = date;
         fixture.detectChanges();
 
-        const divElement = fixture.debugElement.query(By.css('#beginHour'));
-        expect(divElement.nativeElement.textContent.trim()).toBeDefined();
+        const divElement = fixture.debugElement.query(By.css('#startDate'));
+        const content = divElement.nativeElement.textContent.trim();
+        expect(content).toContain('01' && '02' && '19' && '20' && '30' && '40');
+    });
+
+    it('Test end date', () => {
+        expect(component.fightService.startDate).toBeUndefined();
+
+        component.fightService.endDate = date;
+        fixture.detectChanges();
+
+        const divElement = fixture.debugElement.query(By.css('#endDate'));
+        const content = divElement.nativeElement.textContent.trim();
+        expect(content).toContain('01' && '02' && '19' && '20' && '30' && '40');
     });
 
     it('Have winner', () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
-        let fightService = new FightService();
-
-        // @ts-ignore
-        fightService.winner = new Player('Player1', [new Pokemon('pkm1', 4, new Family('fire', 'success'), null),
-            new Pokemon('pkm1', 4, new Family('fire', 'success'), null),
-            new Pokemon('pkm1', 4, new Family('fire', 'success'), null),
-        ]);
-
+        expect(component.fightService.startDate).toBeUndefined();
+        component.fightService.winner = player1;
         fixture.detectChanges();
+
         const divElement = fixture.debugElement.query(By.css('#winnerPlayer'));
-        console.log(divElement);
-        //let winnerText = divElement.nativeElement.textContent.trim();
-        console.log(fightService.winner);
+        let content = divElement.nativeElement.textContent.trim();
 
-        expect(app).toBeTruthy();
-    });
+        expect(content).toContain(player1.name);
 
-    it('Test end hour', () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
-        let fightService = new FightService();
-        fightService.isEnd();
-        console.log(fightService.endDate);
+        component.fightService.winner = player2;
         fixture.detectChanges();
-        const divElement = fixture.debugElement.query(By.css('#endHour'));
-        let hourLine = divElement.nativeElement.textContent.trim();
-        console.log(hourLine);
 
-        expect(app).toBeTruthy();
+        content = divElement.nativeElement.textContent.trim();
+        expect(content).toContain(player2.name);
     });
-
-
 });
