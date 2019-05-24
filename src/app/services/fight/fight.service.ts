@@ -19,8 +19,8 @@ export class FightService implements OnDestroy {
     electricFamily: Family;
     electricAttacks: Array<Attack>;
     logs: Array<Logs> = [];
-    alreadyStart: boolean;
-    isPlaying = false;
+    alreadyStart: boolean = false;
+    isPlaying: boolean = false;
     startDate: Date;
     endDate: Date;
     winner: Player;
@@ -37,8 +37,8 @@ export class FightService implements OnDestroy {
     }
 
     initData() {
-        this.player1 = new Player('player 1');
-        this.player2 = new Player('player 2');
+        this.player1 = new Player('Player 1');
+        this.player2 = new Player('Player 2');
 
         this.normalFamily = new Family('Normal', 'secondary');
         this.fireFamily = new Family('Fire', 'danger');
@@ -189,6 +189,7 @@ export class FightService implements OnDestroy {
     }
 
     getWinner() {
+        console.log(this.player1.haveAlivePokemon());
         return this.player1.haveAlivePokemon() ? this.player1 : this.player2
     }
 
